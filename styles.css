@@ -27,59 +27,59 @@
 body {
     height: 100vh;
     font-family: Poppins;
-    background-color: var(--color-background);
-  }
-  
-  #right-side{
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--color-primary);
-  }
-
-  .row, .container-fluid{
-      height: 100%;
-  }
-
- img{
-     margin-top: 56px;
- }
-
- form, button{
-     width: 281px;
- }
-
- button.btn.btn-primary{
-     margin-top: 32px;
-     color: var(--color-button-text);
-     border-color: var(--color-button);
-     background-color: var(--color-button);
- }
- 
-
- label{
-     font-size: 14px;
-     font-weight: 300;
-     color: var(--color-input-title);
- }
-
- label.form-check-label, a{
-     font-size: 12px;
-     font-weight: 300;
-     color: var(--color-yellow);
- }
-
- span {
-    font-size: 24px;
-    font-weight: 300;
-    color: var(--color-input-title);
 }
 
-.form-check-label{
+img {
+    margin-top: 56px;
+}
+
+form, button {
+    width: 281px;
+}
+
+
+/* Lado direito */
+#right-side {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-primary);
+}
+
+.row, .container-fluid {
+    height: 100%;
+}
+
+button.btn.btn-primary {
+   margin-top: 32px;
+   color: var(--color-button-text);
+   border-color: var(--color-button);
+   background-color: var(--color-button);
+}
+
+label{
+   font-size: 14px;
+   font-weight: 300;
+   color: var(--color-input-title);
+}
+
+label.form-check-label, a {
+   font-size: 12px;
+   font-weight: 300;
+   color: var(--color-yellow);
+}
+
+span {
+   font-size: 24px;
+   font-weight: 300;
+   color: var(--color-input-title);
+}
+
+.form-check-label {
     padding-left: 0%;
 }
 
-.form-group{
+.form-group {
     margin-top: 24px;
 }
 
@@ -94,7 +94,7 @@ body {
     margin-top: 0; 
 }
 
-.images{
+.images {
     display: grid;
     margin-top: 10px;
     margin-left: 72px;
@@ -102,11 +102,11 @@ body {
     justify-content: center;
 }
 
-.fa-eye-slash:before, .fa-eye:before{
+.fa-eye-slash:before, .fa-eye:before {
     color: var(--color-primary);
 }
 
-#show_hide_password{
+#show_hide_password {
     align-items: center;
 }
 

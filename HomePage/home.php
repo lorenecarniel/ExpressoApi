@@ -2,16 +2,49 @@
 <html lang="pt-br">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Expresso API</title>
-    <link rel="shortcut icon" href="../assets/images/image-logo.png"/>
+    <link rel="shortcut icon" href="../assets/images/image-logo.png" />
+
+    <!-- Importação de CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="styles/stylesMenu.css">
+    <link rel="stylesheet" href="styles/stylesDashboard.css">
+    <link rel="stylesheet" href="styles/stylesSettings.css">
+    <link rel="stylesheet" href="styles/stylesContrast.css">
+
 </head>
+
+<!-- Dark mode (criação do objeto) -->
+<?php
+
+$theme_config = "";
+
+if ($_COOKIE) {
+    $theme_config = $_COOKIE["theme"];
+} else {
+    $theme_config = "light";
+}
+
+$theme = [
+    "light" => [
+        "background" => "#F5F5F5",
+        "color" => "#343A40",
+
+    ],
+    "dark" => [
+        "background" => "#121212",
+        "color" => "#ffffff"
+    ],
+];
+
+?>
 
 <body>
     <div id="page-menu">
+
+        <!-- Navegação lateral -->
         <nav id="sidebar">
             <ul id="menu-sidebar" class="nav nav-pills flex-column" role="tablist">
                 <li class="sidebar-header">
@@ -30,24 +63,40 @@
                         <span class="ml-3">Configurações</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="pill" href="#logout" role="tab" title="Sair">
+                        <img src="../assets/icons/logout.svg" alt="Sair">
+                        <span class="ml-3">Sair</span>
+                    </a>
+                </li>
             </ul>
         </nav>
 
+        <!-- Conteúdo das páginas -->
         <div class="menu-content">
             <div id="menu-sidebarContent" class="tab-content h-100">
+                
+               <!-- Dashboard -->
                 <div class="h-100 tab-pane active" id="dashboard" role="tabpanel">
                     <header>
                         <button type="button" class="btn text-info collapse-sidebar">
                             <img src="../assets/icons/menu.svg">
                         </button>
+
                         <h1>Dashboard</h1>
-                        <a href="../Expresso API.html" class="logout">
-                            <img src="../assets/icons/logout.svg" alt="Sair">
-                            Sair
-                        </a>
+
+                        <label class="switch">
+                            <input type="checkbox" src="contrast.png" id="toggleTheme" 
+                            <?php
+                                if ($_COOKIE["theme"] == "dark") {
+                                echo "checked";
+                            }?>>
+                            <span class="slider round"></span>
+                        </label>
                     </header>
-                    <main class="content">
-                        <!-- adicionar conteúdo aqui -->
+
+                    <main class="content" style="background-color: <?php echo $theme[$theme_config]["background"]; ?>; color: <?php echo $theme[$theme_config]["color"]; ?>">
+                        <!-- conteúdo Dashboard -->
                         <div id="layoutSidenav_content">
                             <main>
                                 <!--Filtro-->
@@ -56,26 +105,25 @@
                                         <input id="date" type="date">
                                         <img src="../assets/icons/search.svg" alt="Pesquisar" id="buttonFilter">
                                     </label>
-
                                 </div>
 
                                 <div class="container-fluid">
                                     <div class="row">
-                                        <!--card-->
+                                        <!--Card com gráfico de pizza-->
                                         <div class="col-lg-6">
                                             <div class="card mb-4 doughnut-card">
                                                 <div id="first-card" class="card-header" id="card-header-sms">
                                                     SMS
 
-                                                    <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                        data-target="#modalSms">
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalSms">
                                                         Detalhes
                                                     </button>
-
                                                 </div>
-                                                <!--Gráfico rosquinha -->
-                                                <div class="card-body" id="card-body-sms"><canvas
-                                                        id="myDoughnutChartSms" width="100%" height="50"></canvas></div>
+
+                                                <!--Gráfico de pizza -->
+                                                <div class="card-body" id="card-body-sms">
+                                                    <canvas id="myDoughnutChartSms" width="100%" height="50"></canvas>
+                                                </div>
 
                                                 <!--Grid-->
                                                 <section class="grid grid-template-columns-4">
@@ -108,7 +156,7 @@
                                                 </tr>
                                             </table>
 
-                                            <!--Card-->
+                                            <!--Card com gráfico de barras-->
                                             <div class="card mb-4">
                                                 <div class="card-header">
                                                     <i class="fas fa-chart-bar mr-1"></i>
@@ -122,30 +170,27 @@
                                                         <option value="week4">Semana 4</option>
                                                     </select>
                                                 </div>
+                                                
                                                 <!--Gráfico em barras -->
-                                                <div class="card-body"><canvas id="myBarChartSms" width="100%"
-                                                        height="50"></canvas></div>
-
+                                                <div class="card-body"><canvas id="myBarChartSms" width="100%" height="50"></canvas></div>
                                                 <div class="average-use">USO MÉDIO DE SMS: 8</div>
                                             </div>
-
                                         </div>
 
-                                        <!--Card-->
+                                        <!--Card com gráfico de pizza-->
                                         <div class="col-lg-6">
                                             <div class="card mb-4 doughnut-card">
                                                 <div id="first-card" class="card-header">
                                                     CHAMADAS EXCEDENTES
 
-                                                    <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                        data-target="#modalChamadas">
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalChamadas">
                                                         Detalhes
                                                     </button>
                                                 </div>
 
-                                                <!--Gráfico rosquinha -->
-                                                <div class="card-body"><canvas id="myDoughnutChartCall" width="100%"
-                                                        height="50"></canvas>
+                                                <!--Gráfico de pizza -->
+                                                <div class="card-body">
+                                                    <canvas id="myDoughnutChartCall" width="100%" height="50"></canvas>
                                                 </div>
 
                                                 <!--Grid-->
@@ -180,7 +225,7 @@
                                                 </tr>
                                             </table>
 
-                                            <!--Card-->
+                                            <!--Card com gráfico em barras-->
                                             <div class="card mb-4">
                                                 <div class="card-header">
                                                     <i class="fas fa-chart-bar mr-1"></i>
@@ -196,36 +241,32 @@
                                                 </div>
 
                                                 <!--Gráfico em barras -->
-                                                <div class="card-body"><canvas id="myBarChartCall" width="100%"
-                                                        height="50"></canvas></div>
-
+                                                <div class="card-body"><canvas id="myBarChartCall" width="100%" height="50"></canvas></div>
                                                 <div class="average-use">MÉDIA DE CHAMADAS DIÁRIAS DE SMS: 8</div>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
                             </main>
                         </div>
 
-                        <!-- Modal -->
-                        <div class="modal fade" id="modalSms" data-backdrop="static" data-keyboard="false" tabindex="-1"
-                            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <!-- Modal de mais detalhes sms-->
+                        <div class="modal fade" id="modalSms" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog modal-xl">
                                 <div class="modal-content">
+                                    <!-- Cabeçalho do modal -->
                                     <div class="modal-header">
-                                        <label for="example-date-input input-sm"
-                                            class="col-xs-2 col-form-label">Mês/Ano</label>
+                                        <label for="example-date-input input-sm" class="col-xs-2 col-form-label">Mês/Ano</label>
+                                       
                                         <div class="col-xs-2">
-                                            <input class="form-control ml-3" type="date"
-                                                id="example-date-input">
+                                            <input class="form-control ml-3" type="date" id="example-date-input">
                                         </div>
+                                        
                                         <img src="../assets/icons/search.svg" class="align-self-center">
-                                        <img src="../assets/icons/cancel.svg" class="close" data-dismiss="modal"
-                                            aria-label="Close">
-
-                                        </button>
+                                        <img src="../assets/icons/cancel.svg" class="close" data-dismiss="modal" aria-label="Close">
                                     </div>
+
+                                    <!-- Conteúdo do modal -->
                                     <div class="modal-body">
                                         <h5 class="font-weight-bolder">Detalhes do Meu Plano SMS em Setembro/2020</h5>
                                         <div class="table-responsive-lg">
@@ -279,24 +320,24 @@
                             </div>
                         </div>
 
-                        <!-- Modal -->
-                        <div class="modal fade" id="modalChamadas" data-backdrop="static" data-keyboard="false"
-                            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <!-- Modal de mais detalhes das chamadas -->
+                        <div class="modal fade" id="modalChamadas" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog modal-xl">
                                 <div class="modal-content">
+                                    
+                                    <!-- Cabeçalho do modal -->
                                     <div class="modal-header">
-                                        <label for="example-date-input input-sm"
-                                            class="col-xs-2 col-form-label font-weight-bold">Mês/Ano</label>
+                                        <label for="example-date-input input-sm" class="col-xs-2 col-form-label font-weight-bold">Mês/Ano</label>
                                         <div class="col-xs-2">
-                                            <input class="form-control ml-3" type="date" 
-                                                id="example-date-input">
+                                            <input class="form-control ml-3" type="date" id="example-date-input">
                                         </div>
                                         <img src="../assets/icons/search.svg" class="align-self-center">
-                                        <img src="../assets/icons/cancel.svg" class="close" data-dismiss="modal"
-                                            aria-label="Close">
+                                        <img src="../assets/icons/cancel.svg" class="close" data-dismiss="modal" aria-label="Close">
 
                                         </button>
                                     </div>
+
+                                    <!-- Conteúdo do modal -->
                                     <div class="modal-body">
                                         <h5 class="font-weight-bolder">Detalhes do Meu Plano Chamadas Excedentes em
                                             Setembro/2020</h5>
@@ -352,19 +393,28 @@
                         </div>
                     </main>
                 </div>
+
+                <!-- Configurações -->
                 <div class="h-100 tab-pane" id="settings" role="tabpanel">
+                    
+                    <!-- Cabeçalho configurações -->
                     <header>
                         <button type="button" class="btn text-info collapse-sidebar">
                             <img src="../assets/icons/menu.svg">
                         </button>
                         <h1>Settings</h1>
-                        <a href="../Expresso API.html" class="logout">
-                            <img src="../assets/icons/logout.svg" alt="Sair">
-                            Sair
-                        </a>
+
+                        <label class="switch">
+                            <input type="checkbox" src="contrast.png" id="toggleTheme" 
+                            <?php if ($_COOKIE["theme"] == "dark") {
+                                echo "checked";
+                            }?>>
+                            <span class="slider round"></span>
+                        </label>
                     </header>
+
                     <main class="content">
-                        <!-- adicionar conteúdo aqui -->
+                        <!-- Conteúdo -->
                         <div class="card">
                             <div id="card-settings" class="card-header">
                                 Selecione abaixo os provedores
@@ -377,8 +427,7 @@
                                 </div>
                                 <div class="card-z"></div>
                                 <div class="card-y2">
-                                    <a href="#" class="btn btn-primary" data-toggle="modal"
-                                        data-target="#modalConfirm">Adicionar</a>
+                                    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modalConfirm">Adicionar</a>
                                 </div>
                             </div>
                         </div>
@@ -397,8 +446,7 @@
                                             JAMEF
                                         </div>
                                     </div>
-                                    <a href="#" class="btn" data-toggle="modal" data-target="#modalConfirm"><img
-                                            src="../assets/icons/delete.svg" alt="Excluir"></a>
+                                    <a href="#" class="btn" data-toggle="modal" data-target="#modalConfirm"><img src="../assets/icons/delete.svg" alt="Excluir"></a>
                                 </div>
                                 <div class="card-body">
                                     <div class="card-text">
@@ -409,8 +457,7 @@
                                             RTE
                                         </div>
                                     </div>
-                                    <a href="#" class="btn" data-toggle="modal" data-target="#modalConfirm"><img
-                                            src="../assets/icons/delete.svg" alt="Excluir"></a>
+                                    <a href="#" class="btn" data-toggle="modal" data-target="#modalConfirm"><img src="../assets/icons/delete.svg" alt="Excluir"></a>
                                 </div>
                             </div>
 
@@ -424,8 +471,7 @@
                                             GBC
                                         </div>
                                     </div>
-                                    <a href="#" class="btn" data-toggle="modal" data-target="#modalConfirm"><img
-                                            src="../assets/icons/delete.svg" alt="Excluir"></a>
+                                    <a href="#" class="btn" data-toggle="modal" data-target="#modalConfirm"><img src="../assets/icons/delete.svg" alt="Excluir"></a>
                                 </div>
                                 <div class="card-body">
                                     <div class="card-text">
@@ -436,40 +482,35 @@
                                             ABC
                                         </div>
                                     </div>
-                                    <a href="#" class="btn" data-toggle="modal" data-target="#modalConfirm"><img
-                                            src="../assets/icons/delete.svg" alt="Excluir"></a>
+                                    <a href="#" class="btn" data-toggle="modal" data-target="#modalConfirm"><img src="../assets/icons/delete.svg" alt="Excluir"></a>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="modal fade" id="modalConfirm" tabindex="-1" role="dialog"
-                            aria-labelledby="modalConfirmLabel" aria-hidden="true">
+                        <!-- Modal de Confimação de conta -->
+                        <div class="modal fade" id="modalConfirm" tabindex="-1" role="dialog" aria-labelledby="modalConfirmLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div id="modalCorfirm-header" class="modal-header">
-                                        <h5 class="modal-title" id="exempleModalLabel">Confirmação de Usuário</h5>
+                                        <h5 class="modal-title" id="modalLabel">Confirmação de Usuário</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                                            <span aria-hidden="true"><img src="../assets/icons/cancel.svg"
-                                                    alt=""></span>
+                                            <span aria-hidden="true"><img src="../assets/icons/cancel.svg" alt=""></span>
                                         </button>
                                     </div>
                                     <div id="padding-modalCorfirm" class="modal-body">
                                         <form>
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">E-mail</label>
-                                                <input type="email" class="form-control" id="exampleInputEmail1"
-                                                    aria-describedby="emailHelp" placeholder="meuemail@teste.com">
+                                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="meuemail@teste.com">
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputPassword1">Senha</label>
-                                                <input type="password" class="form-control" id="exampleInputPassword1"
-                                                    placeholder="Senha">
+                                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Senha">
                                             </div>
                                         </form>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" id="buttonConfirm"
-                                            class="btn btn-primary bot-a">Confirmar</button>
+                                        <button type="button" id="buttonConfirm" class="btn btn-primary bot-a">Confirmar</button>
                                     </div>
                                 </div>
                             </div>
@@ -480,6 +521,9 @@
         </div>
     </div>
 
+    <!-- Scripts -->
+
+    <!-- Script para Boostrap -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -494,20 +538,47 @@
             })
     </script>
 
-    <!--Scripts para Dashboard-->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+    <!--Script para contraste!-->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ 
+    <script>  
+            const card = document.querySelector('.card');
+            const grid = document.querySelector('.grid');
 
-    <!--Script para Configuração-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+            function toggleDarkMode() {
+                card.classList.toggle('dark');
+                grid.classList.toggle('dark');
+            }
 
+            $("#toggleTheme").on('change', function() {
+                if ($(this).is(':checked')) {
+                    $(this).attr('value', 'true');
+                    document.cookie = "theme=dark";
+                    toggleDarkMode();
+                    location.reload();
 
-    <!--Scricpts dos gráficos-->
-    <script src="../assets/js/chart-bar-sms.js"></script>
-    <script src="../assets/js/chart-bar-call.js"></script>
-    <script src="../assets/js/chart-doughnut-sms.js"></script>
-    <script src="../assets/js/chart-doughnut-call.js"></script>
+                } else {
+                    $(this).attr('value', 'false');
+                    document.cookie = "theme=light";
+                    location.reload();
+                }
+            });
+        </script>
+
+        <!--Scripts para Dashboard-->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+
+        <!--Script para Configuração-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+        <!--Scricpts dos gráficos-->
+        <script src="../assets/js/chart-bar-sms.js"></script>
+        <script src="../assets/js/chart-bar-call.js"></script>
+        <script src="../assets/js/chart-doughnut-sms.js"></script>
+        <script src="../assets/js/chart-doughnut-call.js"></script>
+
 </body>
 
 </html>
