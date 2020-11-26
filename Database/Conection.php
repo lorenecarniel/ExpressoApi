@@ -14,12 +14,11 @@ class Connect
 
     public static function getConnection() {
 
-        $pdoConfig  = DB_DRIVER . ":". "Server=" . DB_HOST . ";";
-        $pdoConfig .= "Database=".DB_NAME.";";
+        $Config  = DB_DRIVER . ":". "Server=" . DB_HOST . ";Database=".DB_NAME.";";
 
         try {
             if(!isset($connection)){
-                $connection =  new PDO($pdoConfig, DB_USER, DB_PASSWORD);
+                $connection =  new PDO($Config, DB_USER, DB_PASSWORD);
                 $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             }
             return $connection;
