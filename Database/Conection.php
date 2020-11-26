@@ -6,7 +6,7 @@ define('DB_PASSWORD'    , "123456");
 define('DB_NAME'        , "EXPRESSOAPI");
 define('DB_DRIVER'      , "sqlsrv");
 
-class Conexao
+class Connect
 {
     private static $connection;
 
@@ -21,13 +21,12 @@ class Conexao
             if(!isset($connection)){
                 $connection =  new PDO($pdoConfig, DB_USER, DB_PASSWORD);
                 $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                echo "Deu certo<br>";
             }
             return $connection;
          } catch (PDOException $e) {
-            $mensagem = "Drivers disponiveis: " . implode(",", PDO::getAvailableDrivers());
-            $mensagem .= "\nErro: " . $e->getMessage();
-            throw new Exception($mensagem);
+            $message = "Drivers disponiveis: " . implode(",", PDO::getAvailableDrivers());
+            $message .= "\nErro: " . $e->getMessage();
+            throw new Exception($message);
          }
      }
 }
