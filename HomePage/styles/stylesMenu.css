@@ -162,3 +162,9 @@ body{
 span.ml-3 {
   font-size: 14px;
 }
+
+.contrast {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }

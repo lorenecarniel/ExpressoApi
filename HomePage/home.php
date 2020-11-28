@@ -64,8 +64,8 @@ $theme = [
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="pill" href="#logout" role="tab" title="Sair">
-                        <img src="../assets/icons/logout.svg" alt="Sair">
+                    <a class="nav-link" href="../ExpressoAPI.html" title="Sair">
+                        <img src="../assets/icons/log-out.svg" alt="Sair">
                         <span class="ml-3">Sair</span>
                     </a>
                 </li>
@@ -75,8 +75,8 @@ $theme = [
         <!-- Conteúdo das páginas -->
         <div class="menu-content">
             <div id="menu-sidebarContent" class="tab-content h-100">
-                
-               <!-- Dashboard -->
+
+                <!-- Dashboard -->
                 <div class="h-100 tab-pane active" id="dashboard" role="tabpanel">
                     <header>
                         <button type="button" class="btn text-info collapse-sidebar">
@@ -85,14 +85,16 @@ $theme = [
 
                         <h1>Dashboard</h1>
 
-                        <label class="switch">
-                            <input type="checkbox" src="contrast.png" id="toggleTheme" 
-                            <?php
-                                if ($_COOKIE["theme"] == "dark") {
-                                echo "checked";
-                            }?>>
-                            <span class="slider round"></span>
-                        </label>
+                        <div class="contrast">
+                            <span>Alto contraste</span>
+                            <label class="switch">
+                                <input type="checkbox" src="contrast.png" id="toggleTheme" <?php
+                                                                                            if ($_COOKIE["theme"] == "dark") {
+                                                                                                echo "checked";
+                                                                                            } ?>>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
                     </header>
 
                     <main class="content" style="background-color: <?php echo $theme[$theme_config]["background"]; ?>; color: <?php echo $theme[$theme_config]["color"]; ?>">
@@ -170,7 +172,7 @@ $theme = [
                                                         <option value="week4">Semana 4</option>
                                                     </select>
                                                 </div>
-                                                
+
                                                 <!--Gráfico em barras -->
                                                 <div class="card-body"><canvas id="myBarChartSms" width="100%" height="50"></canvas></div>
                                                 <div class="average-use">USO MÉDIO DE SMS: 8</div>
@@ -257,11 +259,11 @@ $theme = [
                                     <!-- Cabeçalho do modal -->
                                     <div class="modal-header">
                                         <label for="example-date-input input-sm" class="col-xs-2 col-form-label">Mês/Ano</label>
-                                       
+
                                         <div class="col-xs-2">
                                             <input class="form-control ml-3" type="date" id="example-date-input">
                                         </div>
-                                        
+
                                         <img src="../assets/icons/search.svg" class="align-self-center">
                                         <img src="../assets/icons/cancel.svg" class="close" data-dismiss="modal" aria-label="Close">
                                     </div>
@@ -324,7 +326,7 @@ $theme = [
                         <div class="modal fade" id="modalChamadas" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog modal-xl">
                                 <div class="modal-content">
-                                    
+
                                     <!-- Cabeçalho do modal -->
                                     <div class="modal-header">
                                         <label for="example-date-input input-sm" class="col-xs-2 col-form-label font-weight-bold">Mês/Ano</label>
@@ -396,7 +398,7 @@ $theme = [
 
                 <!-- Configurações -->
                 <div class="h-100 tab-pane" id="settings" role="tabpanel">
-                    
+
                     <!-- Cabeçalho configurações -->
                     <header>
                         <button type="button" class="btn text-info collapse-sidebar">
@@ -405,10 +407,9 @@ $theme = [
                         <h1>Settings</h1>
 
                         <label class="switch">
-                            <input type="checkbox" src="contrast.png" id="toggleTheme" 
-                            <?php if ($_COOKIE["theme"] == "dark") {
-                                echo "checked";
-                            }?>>
+                            <input type="checkbox" src="contrast.png" id="toggleTheme" <?php if ($_COOKIE["theme"] == "dark") {
+                                                                                            echo "checked";
+                                                                                        } ?>>
                             <span class="slider round"></span>
                         </label>
                     </header>
@@ -540,44 +541,44 @@ $theme = [
 
     <!--Script para contraste!-->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
- 
-    <script>  
-            const card = document.querySelector('.card');
-            const grid = document.querySelector('.grid');
 
-            function toggleDarkMode() {
-                card.classList.toggle('dark');
-                grid.classList.toggle('dark');
+    <script>
+        const card = document.querySelector('.card');
+        const grid = document.querySelector('.grid');
+
+        function toggleDarkMode() {
+            card.classList.toggle('dark');
+            grid.classList.toggle('dark');
+        }
+
+        $("#toggleTheme").on('change', function() {
+            if ($(this).is(':checked')) {
+                $(this).attr('value', 'true');
+                document.cookie = "theme=dark";
+                toggleDarkMode();
+                location.reload();
+
+            } else {
+                $(this).attr('value', 'false');
+                document.cookie = "theme=light";
+                location.reload();
             }
+        });
+    </script>
 
-            $("#toggleTheme").on('change', function() {
-                if ($(this).is(':checked')) {
-                    $(this).attr('value', 'true');
-                    document.cookie = "theme=dark";
-                    toggleDarkMode();
-                    location.reload();
+    <!--Scripts para Dashboard-->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
 
-                } else {
-                    $(this).attr('value', 'false');
-                    document.cookie = "theme=light";
-                    location.reload();
-                }
-            });
-        </script>
+    <!--Script para Configuração-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
-        <!--Scripts para Dashboard-->
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
-
-        <!--Script para Configuração-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-
-        <!--Scricpts dos gráficos-->
-        <script src="../assets/js/chart-bar-sms.js"></script>
-        <script src="../assets/js/chart-bar-call.js"></script>
-        <script src="../assets/js/chart-doughnut-sms.js"></script>
-        <script src="../assets/js/chart-doughnut-call.js"></script>
+    <!--Scricpts dos gráficos-->
+    <script src="../assets/js/chart-bar-sms.js"></script>
+    <script src="../assets/js/chart-bar-call.js"></script>
+    <script src="../assets/js/chart-doughnut-sms.js"></script>
+    <script src="../assets/js/chart-doughnut-call.js"></script>
 
 </body>
 
