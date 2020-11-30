@@ -1,5 +1,4 @@
-
-/* Configurações */
+  /* Configurações */
 #settings{
     height: 100vh !important;
   }
@@ -13,6 +12,8 @@
     background-color: var(--color-primary);
   }
   
+
+  
   #card-settings{
     font-size: 16px;
   }
@@ -21,9 +22,10 @@
     width: 800px;
   }
   
-  .card-body{
+  #card-body-settings{
       display: flex;
       align-items: center;
+      background-color: white;
   }
   
   .card-body-a{

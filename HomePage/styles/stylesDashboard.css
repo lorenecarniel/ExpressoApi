@@ -9,15 +9,21 @@
     background-color: var(--color-background-graphic);
   }
   
-  .card.dark {
-    background-color: aquamarine;
+  .card-body {
+    background-color: white;
   }
+
+ 
+  
   
   .doughnut-card{
     margin-bottom: 32px !important;
   }
   
   .card-header {
+    padding: .70rem;
+    align-items: center;
+    justify-content: space-between;
     font-size: 16px;
     font-weight: 600;
     color: #083171;
@@ -32,16 +38,11 @@
     justify-content: space-between;
   }
   
-  .card-header {
-    padding: .70rem;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
   div#first-card {
     display: flex;
     font-size: 14px;
   }
+  
   
   /* Mais informações modal */
   .more_informations {
@@ -85,11 +86,6 @@
   
   
     /* Grid */
-  
-  .grid {
-      display: grid;
-  }
-  
   .item {  
     text-align: center;
     width: auto;   
@@ -116,6 +112,7 @@
   }
   
   .grid {
+    display: grid;
     padding: 0;
     font-size: 14px;
     font-weight: 400;
@@ -123,16 +120,12 @@
     border-radius: 0.25rem;
     background-color: var(--color-background-cards);  
   }
-  
-  .grid.dark{
-      background-color: #343A40;
-  }
-  
+
+ 
   
   .grid-template-columns-4 {
     grid-template-columns: repeat(3, 1fr);
   }
-  
   
   /* Select - semana */
   .weeks{
@@ -157,7 +150,7 @@
     background-color:var(--color-background-cards);
     box-shadow: 1px 1px 4px 0px var(--color-shadow);
   }
-  
+
   /* Tabela */
   table, td, th {  
     border: 1px solid #ddd;
@@ -284,3 +277,33 @@
   }
   
   
+/* Dark mode */
+
+.card-body.dark {
+  background-color: #1E1E1E;
+}
+
+.card .card-header.dark {
+  background-color: #272727;
+  color: #ffffff;
+}
+
+button.btn.btn-primary.dark, select.dark{
+  background-color: #121212;
+  border: none;
+}
+
+.grid.dark {
+  background-color: #272727;
+}
+
+.average-use.dark {
+  background-color: black;
+  color: #a6d4fa;
+}
+
+
+table.dark {
+  background-color: #1E1E1E;
+  color: #ffffff;
+}
