@@ -9,17 +9,10 @@
     background-color: var(--color-background-graphic);
   }
   
-  .card-body {
-    background-color: white;
-  }
-
- 
-  
-  
   .doughnut-card{
     margin-bottom: 32px !important;
   }
-  
+    
   .card-header {
     padding: .70rem;
     align-items: center;
@@ -117,12 +110,10 @@
     font-size: 14px;
     font-weight: 400;
     list-style-type: none;
-    border-radius: 0.25rem;
     background-color: var(--color-background-cards);  
+    border-radius: 0 0 4px 4px;
   }
 
- 
-  
   .grid-template-columns-4 {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -134,7 +125,7 @@
     text-align: left;
     font-weight: 400;
     border-radius: 0.40rem;
-    border-color: #D0D0D0;
+    border: none;
     padding: 2px 15px 2px 5px;
     color: var(--color-button-text);
     background-color: var(--color-button);
@@ -145,7 +136,7 @@
     padding: 6px 0px;
     font-weight: 400;
     text-align: center;
-    border-radius: 0.25rem;
+    border-radius: 0 0 4px 4px;
     color: var(--color-primary);
     background-color:var(--color-background-cards);
     box-shadow: 1px 1px 4px 0px var(--color-shadow);
@@ -153,7 +144,7 @@
 
   /* Tabela */
   table, td, th {  
-    border: 1px solid #ddd;
+    border: 0.01px solid rgb(216, 216, 216);
   }
   
   table {
@@ -166,7 +157,7 @@
   }
   
   th{
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
     text-align: center;
   }
@@ -276,34 +267,6 @@
     margin-bottom: 1rem;
   }
   
-  
-/* Dark mode */
-
-.card-body.dark {
-  background-color: #1E1E1E;
-}
-
-.card .card-header.dark {
-  background-color: #272727;
-  color: #ffffff;
-}
-
-button.btn.btn-primary.dark, select.dark{
-  background-color: #121212;
-  border: none;
-}
-
-.grid.dark {
-  background-color: #272727;
-}
-
-.average-use.dark {
-  background-color: black;
-  color: #a6d4fa;
-}
-
-
-table.dark {
-  background-color: #1E1E1E;
-  color: #ffffff;
-}
+  #date{
+    font-size: 12px;
+  }

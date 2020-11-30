@@ -77,13 +77,7 @@
         //Script para contraste
 
         const input = document.querySelector('#toggleTheme');
-        const cardList = document.querySelectorAll('.card-body');
-        const cardheaderList = document.querySelectorAll('.card .card-header');
-        const gridList = document.querySelectorAll('.grid');
-        const footercardList = document.querySelectorAll('.average-use');
-        const tableList = document.querySelectorAll('table');
-        const buttonList = document.querySelectorAll('button.btn.btn-primary');
-        const selectList = document.querySelectorAll('select')
+        const allPage = document.querySelector('#page-menu');
 
         input.onchange = toggleDarkMode;
 
@@ -91,24 +85,12 @@
 
         if (theme) {
             input.setAttribute('checked', 'true');
-            cardList.forEach(card => card.classList.add(theme));
-            cardheaderList.forEach(card => card.classList.add(theme));
-            gridList.forEach(grid => grid.classList.add(theme));
-            footercardList.forEach(card => card.classList.add(theme));
-            tableList.forEach(table => table.classList.add(theme));
-            buttonList.forEach(button => button.classList.add(theme));
-            selectList.forEach(select => select.classList.add(theme));
+            allPage.classList.add(theme);
         }
 
         function toggleDarkMode() {
             input.toggleAttribute('checked');
-            cardList.forEach(card => card.classList.toggle('dark'));
-            cardheaderList.forEach(card => card.classList.toggle('dark'));
-            gridList.forEach(grid => grid.classList.toggle('dark'));
-            footercardList.forEach(card => card.classList.toggle('dark'));
-            tableList.forEach(table => table.classList.toggle('dark'));
-            buttonList.forEach(button => button.classList.toggle('dark'));
-            selectList.forEach(select => select.classList.toggle('dark'));
+            allPage.classList.toggle('dark');
 
             if (theme) {
                 theme = undefined;

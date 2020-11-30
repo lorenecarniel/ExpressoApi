@@ -10,7 +10,7 @@ var myDoughnutChart = new Chart(ctx, {
     labels: ["Contratado", "Utilizado", "Extra"],
     datasets: [{
       data: [12, 15, 11],
-      backgroundColor: ['#0D47A1', '#3FA777', '#E63946'],
+      backgroundColor: ['#a6d4fa', '#81c784', '#e57373'],
     }],
   },
 

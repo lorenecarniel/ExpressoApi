@@ -12,8 +12,6 @@
     background-color: var(--color-primary);
   }
   
-
-  
   #card-settings{
     font-size: 16px;
   }
@@ -82,6 +80,10 @@
       border-color: var(--color-primary);
       background-color: var(--color-primary);
   }
+
+  button.btn.btn-primary:hover{
+    background-color: #5775B2;
+  }
   
   a.btn.btn-primary {
     display: flex;
@@ -97,7 +99,7 @@
     align-items: center;
     justify-content: center;
     background: var(--color-button);
-    border-color: var(--color-input-title);
+    border: none;
   }
   
   #buttonConfirm{

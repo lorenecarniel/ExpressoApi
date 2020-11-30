@@ -7,11 +7,11 @@ var ctx = document.getElementById("myBarChartSms");
 var myLineChart = new Chart(ctx, {
   type: 'bar',
   data: {
-    labels: ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb","Dom"],
+    labels: ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"],
     datasets: [{
       label: "SMS",
-      backgroundColor: "#3FA777",
-      data: [23, 53, 25, 78, 82, 19,49],
+      backgroundColor: "#81c784",
+      data: [23, 53, 25, 78, 82, 19, 49],
     }],
   },
   options: {
