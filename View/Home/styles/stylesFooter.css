@@ -1,0 +1,37 @@
+/* Contato */
+#contact {
+  display: flex;
+  padding: 25px 0;
+  align-items: center;
+  justify-content: center;
+  background-color: #cccccc;
+}
+
+#linha-vertical {
+  height: 55px;
+  border-right: 0.5px solid black;
+}
+
+.contact-email {
+  margin-left: 50px;
+  width: 237px;
+  font-size: 12px;
+}
+
+.title-contact {
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.rights-reserved {
+  margin-left: 50px;
+  font-size: 12px;
+}
+
+.footer-logo img {
+  width: 8rem;
+}
+
+.contact-email img {
+  width: 20px;
+}

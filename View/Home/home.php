@@ -5,7 +5,7 @@
 
     <meta charset="UTF-8">
     <title>Expresso API</title>
-    <link rel="shortcut icon" href="../assets/images/image-logo.png" />
+    <link rel="shortcut icon" href="../../assets/images/image-logo.png" />
 
     <!-- Importação de CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
@@ -21,24 +21,24 @@
         <nav id="sidebar">
             <ul id="menu-sidebar" class="nav nav-pills flex-column" role="tablist">
                 <li class="sidebar-header">
-                    <img src="../assets/images/image-logo.png" class="logo">
-                    <img src="../assets/images/titulo-white.png" class="app-title">
+                    <img src="../../assets/images/image-logo.png" class="logo">
+                    <img src="../../assets/images/titulo-white.png" class="app-title">
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" data-toggle="pill" href="#dashboard" role="tab" title="Dashboard">
-                        <img src="../assets/icons/dashboard.svg" alt="Dashboard">
+                        <img src="../../assets/icons/dashboard.svg" alt="Dashboard">
                         <span class="ml-3">Dashboard</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="pill" href="#settings" role="tab" title="Configurações">
-                        <img src="../assets/icons/settings.svg" alt="Configurações">
+                        <img src="../../assets/icons/settings.svg" alt="Configurações">
                         <span class="ml-3">Configurações</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../ExpressoAPI.html" title="Sair">
-                        <img src="../assets/icons/log-out.svg" alt="Sair">
+                    <a class="nav-link" href="../index.html" title="Sair">
+                        <img src="../../assets/icons/log-out.svg" alt="Sair">
                         <span class="ml-3">Sair</span>
                     </a>
                 </li>
@@ -48,12 +48,20 @@
         <!-- Conteúdo das páginas -->
         <div class="menu-content">
             <div id="menu-sidebarContent" class="tab-content h-100">
-
-                <!-- Dashboard -->
-                <?php require_once "dashboard.php" ?>
-
-                <!-- Configurações -->
-                <?php require_once "settings.php" ?>
+               
+                <!-- header -->
+                <header class="header">         
+                    
+                </header>
+                
+               <?php
+                //  Dashboard 
+                require_once "../Dashboard/dashboard.php";
+                
+                //  Configurações 
+                require_once "../Settings/settings.php" ;
+                ?>
+    
             </div>
         </div>
     </div>
@@ -76,20 +84,20 @@
 
         //Script para contraste
 
-        const input = document.querySelector('#toggleTheme');
+        const inputList = document.querySelectorAll('.toggle-theme');
         const allPage = document.querySelector('#page-menu');
 
-        input.onchange = toggleDarkMode;
+        inputList.forEach(input => input.onchange = toggleDarkMode);
 
         let theme = document.cookie.split('=')[1];
 
         if (theme) {
-            input.setAttribute('checked', 'true');
+            inputList.forEach(input => input.setAttribute('checked', 'true'));
             allPage.classList.add(theme);
         }
 
         function toggleDarkMode() {
-            input.toggleAttribute('checked');
+            inputList.forEach(input => input.toggleAttribute('checked'));
             allPage.classList.toggle('dark');
 
             if (theme) {
