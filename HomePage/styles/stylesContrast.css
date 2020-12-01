@@ -20,7 +20,6 @@
     display: inline-block;
     width: 60px;
     top: 5px;
-    border: 2px solid #fff;
     border-radius: 25px;
   }
   
@@ -78,3 +77,127 @@
   .slider.round:before {
     border-radius: 50%;
   }
+
+    
+/* Dark mode */
+#page-menu.dark .card{
+  border: none;
+  box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.61);
+ }
+ 
+ #page-menu.dark .card-body, #page-menu.dark .card-body-a{
+   background-color: #333333;
+ }
+
+ #page-menu.dark .card-body-b {
+  background-color:  #515151;
+  color: #ffffff;
+ }
+ 
+ #page-menu.dark .card .card-header{
+   background-color:#424242;
+   color: #ffffff;
+ }
+
+ #page-menu.dark .card-text{
+  color: #ffffff;
+}
+ 
+ #page-menu.dark .btn-primary, #page-menu.dark select{
+   background-color: #515151;
+   color: #ffffff;
+   border: none;
+ }
+
+ #page-menu.dark .btn-primary:active, #page-menu.dark .btn-primary:hover{
+  background-color:  #333333;
+ }
+ 
+ #page-menu.dark .grid{
+   background-color:#424242;
+ }
+ 
+ #page-menu.dark .average-use{
+   background-color: #424242;
+   color: #a6d4fa;
+   box-shadow: none;
+ }
+ 
+ #page-menu.dark .switch{
+   border: none;
+ }
+ 
+ #page-menu.dark table {
+   background-color: #333333;
+   box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.61);  
+   border: solid #515151;
+   color: #ffffff;
+   
+ }
+
+ #page-menu.dark #date{
+   background-color: #515151;
+   color: #ffffff;
+   border: none;
+ }
+
+ 
+ #page-menu.dark body{
+   background-color: black;
+ }
+ 
+ #page-menu.dark .header {
+   background-color: #333333 ; 
+ }
+ 
+ #page-menu.dark #dashboard {
+   background-color: #212121;
+   color: #ffffff;
+ }
+ 
+ #page-menu.dark #settings {
+   background-color: #212121;
+   color: #ffffff;
+ }
+ 
+ #page-menu.dark #sidebar {
+   background-color: rgb(27, 27, 27);
+ }
+
+  
+ #page-menu.dark .modal-content {
+  background-color:  #333333;
+}
+
+#page-menu.dark h5#modalLabel , #page-menu.dark label{
+  color:  #ffffff;
+}
+
+
+#page-menu.dark .font-weight-bolder {
+  background-color: #424242;
+}
+
+#page-menu.dark #table-datas {
+  background-color: #424242 !important;
+}
+
+#page-menu.dark .item.top.first,#page-menu.dark .item.down.first{
+  color: #a6d4fa;
+}
+
+#page-menu.dark .item.top.second, #page-menu.dark .item.down.second{
+  color: #81c784;
+}
+
+#page-menu.dark .item.top.third,#page-menu.dark .item.down.third{
+  color: #e57373;
+}
+
+#page-menu.dark .contrast {
+  color: #ffffff;
+}
+
+#page-menu.dark #sidebar .nav-item .nav-link.active{
+  background-color:  #333333;
+}
