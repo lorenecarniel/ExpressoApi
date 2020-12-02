@@ -2,7 +2,7 @@
 
 define('DB_HOST'        , "localhost");
 define('DB_USER'        , "USUARIO");
-define('DB_PASSWORD'    , "CLIENTE");
+define('DB_PASSWORD'    , "CLIENT");
 define('DB_NAME'        , "EXPRESSOAPI");
 define('DB_DRIVER'      , "sqlsrv");
 
