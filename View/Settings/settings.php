@@ -5,10 +5,10 @@
 
     <meta charset="UTF-8">
     <title>Expresso API</title>
-    <link rel="shortcut icon" href="../assets/images/image-logo.png" />
+    <link rel="shortcut icon" href="../../assets/images/image-logo.png" />
 
     <!-- Importação de CSS -->
-    <link rel="stylesheet" href="./styles/stylesSettings.css">
+    <link rel="stylesheet" href="../Settings/stylesSettings.css">
 
 </head>
 
@@ -16,23 +16,22 @@
     <!-- Confidurações -->
     <div class="h-100 tab-pane" id="settings" role="tabpanel">
 
-        <!-- Cabeçalho configurações -->
         <header class="header">
             <button type="button" class="btn text-info collapse-sidebar">
-                <img src="../assets/icons/menuIcon.svg">
+                <img src="../../assets/icons/menuIcon.svg">
             </button>
-
-            <h1>Settings</h1>
+            
+            <h1>Configurações</h1>
 
             <div class="contrast">
-                <span>Alto contraste</span>
-                <label class="switch">
-                    <input type="checkbox" src="contrast.png" id="toggleTheme">
-                    <span class="slider round"></span>
-                </label>
-            </div>
-        </header>
+                        <span>Alto contraste</span>
+                        <label class="switch">
+                            <input type="checkbox" src="contrast.png" class="toggle-theme">
+                            <span class="slider round"></span>
+                        </label>   
+                    </div>
 
+        </header>
         <main class="content">
             <!-- Conteúdo Configurações -->
             <div class="card">
@@ -66,7 +65,7 @@
                                 JAMEF
                             </div>
                         </div>
-                        <a href="#" class="btn" data-toggle="modal" data-target="#modalConfirm"><img src="../assets/icons/delete.svg" alt="Excluir"></a>
+                        <a href="#" class="btn" data-toggle="modal" data-target="#modalConfirm"><img src="../../assets/icons/delete.svg" alt="Excluir"></a>
                     </div>
                     <div class="card-body" id="card-body-settings">
                         <div class="card-text">
@@ -77,7 +76,7 @@
                                 RTE
                             </div>
                         </div>
-                        <a href="#" class="btn" data-toggle="modal" data-target="#modalConfirm"><img src="../assets/icons/delete.svg" alt="Excluir"></a>
+                        <a href="#" class="btn" data-toggle="modal" data-target="#modalConfirm"><img src="../../assets/icons/delete.svg" alt="Excluir"></a>
                     </div>
                 </div>
 
@@ -91,7 +90,7 @@
                                 GBC
                             </div>
                         </div>
-                        <a href="#" class="btn" data-toggle="modal" data-target="#modalConfirm"><img src="../assets/icons/delete.svg" alt="Excluir"></a>
+                        <a href="#" class="btn" data-toggle="modal" data-target="#modalConfirm"><img src="../../assets/icons/delete.svg" alt="Excluir"></a>
                     </div>
                     <div class="card-body" id="card-body-settings">
                         <div class="card-text">
@@ -102,7 +101,7 @@
                                 ABC
                             </div>
                         </div>
-                        <a href="#" class="btn" data-toggle="modal" data-target="#modalConfirm"><img src="../assets/icons/delete.svg" alt="Excluir"></a>
+                        <a href="#" class="btn" data-toggle="modal" data-target="#modalConfirm"><img src="../../assets/icons/delete.svg" alt="Excluir"></a>
                     </div>
                 </div>
             </div>
@@ -114,7 +113,7 @@
                         <div id="modalCorfirm-header" class="modal-header">
                             <h5 class="modal-title" id="modalLabel">Confirmação de Usuário</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                                <span aria-hidden="true"><img src="../assets/icons/exit.svg" alt=""></span>
+                                <span aria-hidden="true"><img src="../../assets/icons/exit.svg" alt=""></span>
                             </button>
                         </div>
                         <div id="padding-modalCorfirm" class="modal-body">
@@ -136,8 +135,9 @@
                 </div>
             </div>
         </main>
+         <?php require "../Home/footer.php" ?>
     </div>
-
+    
     <!--Script para Configuração-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>

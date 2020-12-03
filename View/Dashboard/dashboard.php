@@ -5,10 +5,11 @@
 
     <meta charset="UTF-8">
     <title>Expresso API</title>
-    <link rel="shortcut icon" href="../assets/images/image-logo.png" />
+    <link rel="shortcut icon" href="../../assets/images/image-logo.png" />
 
     <!-- Importação de CSS -->
-    <link rel="stylesheet" href="./styles/stylesDashboard.css">
+    <link rel="stylesheet" href="../Dashboard/stylesDashboard.css">
+
 
 </head>
 
@@ -16,21 +17,21 @@
     <!-- Dashboard -->
     <div class="h-100 tab-pane active" id="dashboard" role="tabpanel">
 
-        <!-- Cabeçalho dashboard -->
         <header class="header">
             <button type="button" class="btn text-info collapse-sidebar">
-                <img src="../assets/icons/menuIcon.svg">
+                <img src="../../assets/icons/menuIcon.svg">
             </button>
-
+            
             <h1>Dashboard</h1>
 
             <div class="contrast">
-                <span>Alto contraste</span>
-                <label class="switch">
-                    <input type="checkbox" src="contrast.png" id="toggleTheme">
-                    <span class="slider round"></span>
-                </label>
-            </div>
+                        <span>Alto contraste</span>
+                        <label class="switch">
+                            <input type="checkbox" src="contrast.png" class="toggle-theme">
+                            <span class="slider round"></span>
+                        </label>   
+                    </div>
+
         </header>
 
         <main>
@@ -41,7 +42,7 @@
                     <div class="filter">
                         <label>Mês/Ano:
                             <input id="date" type="date">
-                            <img src="../assets/icons/search.svg" alt="Pesquisar" id="buttonFilter">
+                            <img src="../../assets/icons/search.svg" alt="Pesquisar" id="buttonFilter">
                         </label>
                     </div>
 
@@ -194,14 +195,14 @@
                     <div class="modal-content">
                         <!-- Cabeçalho do modal -->
                         <div class="modal-header">
-                            <label for="example-date-input input-sm" class="col-xs-2 col-form-label">Mês/Ano</label>
+                            <label for="date input-sm" class="col-xs-2 col-form-label">Mês/Ano</label>
 
                             <div class="col-xs-2">
-                                <input class="form-control ml-3" type="date" id="example-date-input">
+                                <input class="form-control ml-3" type="date" id="date">
                             </div>
 
-                            <img src="../assets/icons/search.svg" class="align-self-center">
-                            <img src="../assets/icons/exit.svg" class="close" data-dismiss="modal" aria-label="Close">
+                            <img src="../../assets/icons/search.svg" class="align-self-center">
+                            <img src="../../assets/icons/exit.svg" class="close" data-dismiss="modal" aria-label="Close">
                         </div>
 
                         <!-- Conteúdo do modal -->
@@ -269,8 +270,8 @@
                             <div class="col-xs-2">
                                 <input class="form-control ml-3" type="date" id="date">
                             </div>
-                            <img src="../assets/icons/search.svg" class="align-self-center">
-                            <img src="../assets/icons/exit.svg" class="close" data-dismiss="modal" aria-label="Close">
+                            <img src="../../assets/icons/search.svg" class="align-self-center">
+                            <img src="../../assets/icons/exit.svg" class="close" data-dismiss="modal" aria-label="Close">
 
                             </button>
                         </div>
@@ -330,6 +331,8 @@
                 </div>
             </div>
         </main>
+
+        <footer> <?php require "../Home/footer.php" ?></footer>
     </div>
 
     <!-- Script para Boostrap -->
@@ -342,10 +345,10 @@
 
 
     <!--Scricpts dos gráficos-->
-    <script src="../assets/js/chart-bar-sms.js"></script>
-    <script src="../assets/js/chart-bar-call.js"></script>
-    <script src="../assets/js/chart-doughnut-sms.js"></script>
-    <script src="../assets/js/chart-doughnut-call.js"></script>
+    <script src="../../assets/js/chart-bar-sms.js"></script>
+    <script src="../../assets/js/chart-bar-call.js"></script>
+    <script src="../../assets/js/chart-doughnut-sms.js"></script>
+    <script src="../../assets/js/chart-doughnut-call.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>ExpressoAPI</title>
+    <meta charset="utf-8">
+
+    <!-- Importação CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Importação Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</head>
+
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+
+    <!-- Menu -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <img class="navbar-brand image-logo" src="../assets/images/logo-white.png" alt="logo ExpressoAPI">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class=" navbar-nav">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#howitworks">Como funciona</a></li>
+                <li><a href="#about">Sobre</a></li>
+                <li><a href="#contact">Contato</a></li>
+                <a href="./Login/loginPage.html"><button type="button" class="btn btn-outline-primary" >Entrar</button></a>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Parte inicial -->
+    <div id="home">
+        <div class="home-content">
+            <h1 class="title-home">Tornamos você</h1>
+            <h1 class="type-text">
+                <span href="" class="typewrite" data-period="2000" data-type='[ "conectado", "criativo", "parceiro" ]'>
+                    <span class="wrap"></span>
+                </span>
+            </h1>
+            <a href="./Login/loginPage.html"><button type="button" class="btn btn-primary">Conecte-se</button></a>
+        </div>
+        <img class="image-home" src="../assets/images/backImage.png" alt="">
+    </div>
+
+    <!-- Como funciona -->
+    <div id="howitworks">
+        <div class="title">
+            <h1>Como funciona</h1>
+        </div>
+        <div class="informations">
+            <div class="info-createAccount">
+                <img src="../assets/images/create-account.png" alt="">
+                <span class="title-description"> CRIE SUA CONTA </span>
+                <span> no site da transportadora </span>
+            </div>
+            <div class="info-loginAccount">
+                <img src="../assets/images/login.png" alt="">
+                <span class="title-description"> ENTRE </span>
+                <span> no ExpressoAPI com a mesma conta </span>
+            </div>
+            <div class="info-seeDatas">
+                <img src="../assets/images/see-datas.png" alt="">
+                <span class="title-description"> VISUALIZE </span>
+                <span> todos os dados relacionados a
+                    interação de sms e chamadas
+                    excedentes realizada </span>
+            </div>
+        </div>
+    </div>
+
+     <!-- Sobre -->
+     <div id="about">
+        <video class="video lozad" data-src="exempleSite2.mp4" 
+        loop="loop" type="video/mp4" preload="none" muted="muted" autoplay="autoplay" 
+        src="../assets/video/exempleSite.mp4" data-loaded="true"></video>
+
+        <div class="card-body">
+            <span class="title"> Apresentamos todos os dados dos seus planos </span><br>
+            <span class="description"> Saiba tudo sobre seu plano de SMS e Chamadas
+            Excedentes </span>
+        </div>
+    </div>
+    </div>
+
+
+    <!-- Contato -->
+    <div id="contact">
+        <div class="footer-logo">
+            <img src="../assets/images/logo-vertical.svg" alt="">
+        </div>
+        <div class="contact-email">
+            <img src="../assets/icons/email.png" alt="">
+            <span class="title-contact">CONTATO</span>
+            <span>expressoapi@meuemail.com</span>
+        </div>
+        <div id="linha-vertical"></div>
+        <div class="rights-reserved">
+            <span>ExpressoApi - Todos os direitos reservados </span><br>
+            <span>Desenvolvido por LAGI</span>
+        </div>
+    </div>
+
+    <!-- Script para digitar as palavras (efeito type)-->
+    <script>
+        var TxtType = function (el, toRotate, period) {
+            this.toRotate = toRotate;
+            this.el = el;
+            this.loopNum = 0;
+            this.period = parseInt(period, 10) || 2000;
+            this.txt = '';
+            this.tick();
+            this.isDeleting = false;
+        };
+
+        TxtType.prototype.tick = function () {
+            var i = this.loopNum % this.toRotate.length;
+            var fullTxt = this.toRotate[i];
+
+            if (this.isDeleting) {
+                this.txt = fullTxt.substring(0, this.txt.length - 1);
+            } else {
+                this.txt = fullTxt.substring(0, this.txt.length + 1);
+            }
+
+            this.el.innerHTML = '<span class="wrap">' + this.txt + '</span>';
+
+            var that = this;
+            var delta = 200 - Math.random() * 100;
+
+            if (this.isDeleting) { delta /= 2; }
+
+            if (!this.isDeleting && this.txt === fullTxt) {
+                delta = this.period;
+                this.isDeleting = true;
+            } else if (this.isDeleting && this.txt === '') {
+                this.isDeleting = false;
+                this.loopNum++;
+                delta = 500;
+            }
+
+            setTimeout(function () {
+                that.tick();
+            }, delta);
+        };
+
+        window.onload = function () {
+            var elements = document.getElementsByClassName('typewrite');
+            for (var i = 0; i < elements.length; i++) {
+                var toRotate = elements[i].getAttribute('data-type');
+                var period = elements[i].getAttribute('data-period');
+                if (toRotate) {
+                    new TxtType(elements[i], JSON.parse(toRotate), period);
+                }
+            }
+            // INJECT CSS
+            var css = document.createElement("style");
+            css.type = "text/css";
+            css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff}";
+            document.body.appendChild(css);
+        };
+    </script>
+
+</body>
+
+</html>
