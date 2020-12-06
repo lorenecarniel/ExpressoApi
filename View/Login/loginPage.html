@@ -34,23 +34,25 @@
           <form>
             <span>Conecte-se</span>
 
-            <div class="form-group">
+            <div class="form-group" method="post" action="login.php">
               <label for="inputEmail">Email</label>
               <input
                 type="email"
                 class="form-control"
                 id="inputEmail"
+                name="email"
                 placeholder="meuemail@teste.com"
               />
             </div>
 
-            <div class="form-group">
+            <div class="form-group" method="post" action="login.php">
               <label>Senha</label>
               <div class="input-group" id="show_hide_password">
                 <input
                   class="form-control"
                   type="password"
                   id="inputPassword"
+                  name="password"
                   placeholder="senha"
                 />
                 <div class="input-group-addon">
