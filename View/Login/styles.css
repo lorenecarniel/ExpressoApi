@@ -8,6 +8,7 @@ button {
 }
 
 /* Lado direito */
+
 #right-side {
   display: flex;
   align-items: center;
@@ -40,6 +41,15 @@ a {
   color: var(--color-yellow);
 }
 
+a.forgot-password {
+  text-decoration: none;
+  color: var(--color-yellow);
+}
+
+a.forgot-password:hover {
+  color: var(--color-yellow);
+}
+
 span {
   font-size: 24px;
   font-weight: 300;
@@ -65,14 +75,6 @@ span {
   margin-top: 0;
 }
 
-.images {
-  display: grid;
-  margin-top: 10px;
-  margin-left: 72px;
-  align-items: center;
-  justify-content: center;
-}
-
 .fa-eye-slash:before,
 .fa-eye:before {
   color: var(--color-primary);
@@ -86,4 +88,14 @@ span {
   height: 36px;
   border: none;
   background-color: var(--color-background);
+}
+
+/* Lado esquerdo */
+
+.images {
+  display: grid;
+  margin-top: 10px;
+  margin-left: 72px;
+  align-items: center;
+  justify-content: center;
 }

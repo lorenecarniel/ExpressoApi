@@ -1,35 +1,5 @@
-@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
-
-:root {
-  --color-red: #e63946;
-  --color-white: #ffffff;
-  --color-green: #3fa777;
-  --color-yellow: #ffe775;
-  --color-button: #0a3880;
-  --color-shadow: #888888;
-  --color-primary: #0d47a1;
-  --color-text-gray: #343a40;
-  --color-background: #f5f5f5;
-  --color-button-text: #f5f5f5;
-  --color-input-title: #c5d4ec;
-  --color-button-hover: #0a306b;
-  --color-menu-sidebar: #343a40;
-  --color-menu-contrast: #494e53;
-  --color-secondary-blue: #648cdd;
-  --color-background-cards: #ebebeb;
-  --color-input-border-gray: #bfbfbf;
-  --color-background-graphic: #ffffff;
-  --color-input-text: rgba(64, 64, 64, 54%);
-
-  --header-height: 56px;
-}
-
-body {
-  height: 100vh;
-  font-family: Poppins;
-}
-
 /* Menu e sidebar*/
+
 #page-menu {
   display: flex;
 }
@@ -159,37 +129,27 @@ body {
   margin-right: 8px;
 }
 
-span.ml-3 {
-  font-size: 14px;
-}
-
-.contrast span {
-  font-size: 11px;
-  color: #fff;
-  margin-left: 0px;
-}
-
 li.nav-item.nav-link {
   margin: 0 0px 0 10px;
 }
 
-.contrast img {
-  width: 20px;
+/* Componentes */
+
+span.ml-3 {
+  font-size: 14px;
 }
+
+span.ml-3.config-span {
+  margin-left: 4px !important;
+}
+
+/* Opção sair */
 
 a.exit img {
   width: 19px;
 }
 
 a.exit {
-  text-decoration: none;
   color: black;
-}
-
-.contrast {
-  margin: 10px;
-}
-
-span.ml-3.config-span {
-  margin-left: 4px !important;
+  text-decoration: none;
 }

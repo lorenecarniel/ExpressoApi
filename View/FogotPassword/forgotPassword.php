@@ -1,6 +1,6 @@
 <?php
 
-require_once "Connection.php";
+require_once "connection.php";
 
 if(isset($_POST['enviar'])){
 

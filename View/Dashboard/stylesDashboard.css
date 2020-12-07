@@ -1,5 +1,7 @@
 /* Dashboard */
+
 /* Cards */
+
 .card {
   margin-top: 20px;
   border-radius: 0.25rem;
@@ -34,7 +36,19 @@ div#first-card {
   font-size: 14px;
 }
 
+h5 {
+  height: 53px;
+  display: flex;
+  font-size: 16px;
+  text-indent: 16px;
+  border-radius: 4px;
+  align-items: center;
+  color: var(--color-button-text);
+  background-color: var(--color-primary);
+}
+
 /* Mais informações modal */
+
 .more_informations {
   float: right;
   font-weight: 400;
@@ -72,9 +86,10 @@ div#first-card {
 }
 
 /* Grid */
+
 .item {
-  text-align: center;
   width: auto;
+  text-align: center;
 }
 
 .item.top.first,
@@ -101,13 +116,13 @@ div#first-card {
 }
 
 .grid {
-  display: grid;
   padding: 0;
+  display: grid;
   font-size: 14px;
   font-weight: 400;
   list-style-type: none;
-  background-color: var(--color-background-cards);
   border-radius: 0 0 4px 4px;
+  background-color: var(--color-background-cards);
 }
 
 .grid-template-columns-4 {
@@ -115,13 +130,14 @@ div#first-card {
 }
 
 /* Select - semana */
+
 .weeks {
   float: right;
+  border: none;
   font-size: 12px;
   text-align: left;
   font-weight: 400;
   border-radius: 0.4rem;
-  border: none;
   padding: 2px 15px 2px 5px;
   color: var(--color-button-text);
   background-color: var(--color-button);
@@ -138,34 +154,8 @@ div#first-card {
   box-shadow: 1px 1px 4px 0px var(--color-shadow);
 }
 
-/* Tabela */
-table,
-td,
-th {
-  border: 0.01px solid rgb(216, 216, 216);
-}
-
-table {
-  width: 100%;
-  margin-bottom: 32px;
-  border-radius: 0.25rem;
-  border-collapse: collapse;
-  box-shadow: 1px 1px 4px 0px var(--color-shadow);
-  background-color: var(--color-background-graphic);
-}
-
-th {
-  font-size: 16px;
-  font-weight: 600;
-  text-align: center;
-}
-
-th,
-td {
-  padding: 7px;
-}
-
 /* Filtro */
+
 .filter {
   font-size: 18px;
   text-align: right;
@@ -199,32 +189,44 @@ td {
   opacity: 5;
 }
 
-/* Modal - confirmação de e-mail */
-.modal-body {
-  padding: 24px;
+#date {
+  font-size: 12px;
 }
 
-#padding-modalCorfirm,
-#padding-modalCorfirmChoice {
-  padding: 12px;
-}
-#padding-modalCorfirmChoice {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+input[type="date"].form-control {
+  height: 31px;
+  font-size: 14px;
+  color: var(--color-primary);
 }
 
-#modalCorfirm-header {
-  padding: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column-reverse;
+/* Tabelas */
+
+table,
+td,
+th {
+  border: 0.01px solid rgb(216, 216, 216);
 }
 
-.modal-content {
-  background-color: var(--color-background);
+table {
+  width: 100%;
+  margin-bottom: 32px;
+  border-radius: 0.25rem;
+  border-collapse: collapse;
+  box-shadow: 1px 1px 4px 0px var(--color-shadow);
+  background-color: var(--color-background-graphic);
 }
+
+th {
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+}
+
+th,
+td {
+  padding: 7px;
+}
+
 .table thead th {
   vertical-align: inherit;
 }
@@ -246,32 +248,11 @@ td {
   color: var(--color-text-gray);
 }
 
-.align-self-center {
-  margin-left: 1.5rem;
-}
-
-h5 {
-  height: 53px;
-  display: flex;
-  font-size: 16px;
-  text-indent: 16px;
-  border-radius: 4px;
-  align-items: center;
-  color: var(--color-button-text);
-  background-color: var(--color-primary);
-}
-
-input[type="date"].form-control {
-  height: 31px;
-  font-size: 14px;
-  color: var(--color-primary);
-}
-
 #table-datas {
   width: 100%;
   margin-bottom: 1rem;
 }
 
-#date {
-  font-size: 12px;
+.align-self-center {
+  margin-left: 1.5rem;
 }

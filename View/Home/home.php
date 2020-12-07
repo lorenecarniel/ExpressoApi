@@ -8,9 +8,10 @@
     <link rel="shortcut icon" href="../../assets/images/image-logo.png" />
 
     <!-- Importação de CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../mainStyles.css">
     <link rel="stylesheet" href="./styles/stylesMenu.css">
     <link rel="stylesheet" href="./styles/stylesContrast.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
 
 </head>
 

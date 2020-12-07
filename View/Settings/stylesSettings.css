@@ -215,3 +215,30 @@ h5#modalLabel {
   background: inherit;
   color: var(--color-primary);
 }
+
+/* Modal - confirmação de e-mail */
+.modal-body {
+  padding: 24px;
+}
+
+#padding-modalCorfirm,
+#padding-modalCorfirmChoice {
+  padding: 12px;
+}
+#padding-modalCorfirmChoice {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#modalCorfirm-header {
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column-reverse;
+}
+
+.modal-content {
+  background-color: var(--color-background);
+}

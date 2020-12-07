@@ -1,4 +1,5 @@
-/* Contato */
+/* Rodapé- contato */
+
 #contact {
   display: flex;
   padding: 25px 0;
@@ -13,9 +14,9 @@
 }
 
 .contact-email {
-  margin-left: 50px;
   width: 237px;
   font-size: 12px;
+  margin-left: 50px;
 }
 
 .title-contact {
@@ -24,8 +25,8 @@
 }
 
 .rights-reserved {
-  margin-left: 50px;
   font-size: 12px;
+  margin-left: 50px;
 }
 
 .footer-logo img {

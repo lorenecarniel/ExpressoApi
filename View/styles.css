@@ -3,7 +3,7 @@ body {
   padding: 0;
   height: 100vh;
   font-family: Poppins;
-  background: #ededed;
+  background: var(--color-background-cards);
 }
 
 * {
@@ -53,8 +53,8 @@ li:hover:before {
 }
 
 a {
-  color: #ffffff;
   font-size: 14px;
+  color: #ffffff;
 }
 
 a:hover {
@@ -62,25 +62,27 @@ a:hover {
   text-decoration: none;
 }
 
+/* Botão menu */
 .btn-outline-primary {
+  width: 10rem;
+  font-size: 14px;
   color: #ffffff;
   border-color: #ffffff;
-  font-size: 14px;
-  width: 10rem;
 }
 .btn-outline-primary:hover {
   color: #fff;
-  background-color: #0d47a1;
   border-color: #0d47a1;
+  background-color: #0d47a1;
 }
 
+/* Botão do banner */
 .btn-primary {
-  color: #fff;
-  background-color: #0d47a1;
-  box-shadow: 3px 3px 9px 0px rgba(0, 0, 0, 0.61);
   border: none;
   width: 17rem;
+  color: #fff;
   height: 2.5rem;
+  background-color: #0d47a1;
+  box-shadow: 3px 3px 9px 0px rgba(0, 0, 0, 0.61);
 }
 
 /* Parte inicial */
@@ -102,20 +104,20 @@ img.image-home {
 .home-content {
   display: grid;
   margin-left: 122px;
+  position: absolute;
   align-items: center;
   justify-content: start;
-  position: absolute;
 }
 
 h1.title-home {
-  color: var(--color-primary);
   margin: 0;
+  color: var(--color-primary);
 }
 
 h1.type-text {
-  color: var(--color-white);
   text-decoration: none;
   margin: 15px 0 40px 0;
+  color: var(--color-white);
 }
 
 div#navbarNavDropdown {
@@ -126,38 +128,38 @@ div#navbarNavDropdown {
 #about {
   color: #fff;
   height: 600px;
-  padding-top: 50px;
-  background-color: #0d47a1;
   display: flex;
+  padding-top: 50px;
   align-items: center;
   justify-content: center;
+  background-color: #0d47a1;
 }
 #about .video {
   width: 32rem;
   height: 26rem;
   margin-top: -1%;
-  -o-object-fit: cover;
   object-fit: cover;
   border-radius: 17px;
+  -o-object-fit: cover;
   box-shadow: 3px 3px 9px 0px rgba(0, 0, 0, 0.61);
 }
 
 .card-body {
   flex: none;
-  background: #0056b3;
-  height: 362px;
   width: 350px;
-  border-radius: 0 17px 17px 0;
+  height: 362px;
   display: flex;
   align-items: center;
+  background: #0056b3;
   justify-content: center;
+  border-radius: 0 17px 17px 0;
 }
 
 .card-body .title {
-  color: var(--color-yellow);
+  width: auto;
   font-size: 20px;
   font-weight: 400;
-  width: auto;
+  color: var(--color-yellow);
 }
 
 .card-body .description {
@@ -169,8 +171,8 @@ div#navbarNavDropdown {
 /* Como funciona */
 #howitworks {
   display: grid;
-  padding: 60px 0;
   height: 600px;
+  padding: 60px 0;
   color: #0d47a1;
   align-items: center;
   justify-content: center;
@@ -231,9 +233,9 @@ div#navbarNavDropdown {
 }
 
 .contact-email {
-  margin-left: 50px;
   width: 237px;
   font-size: 12px;
+  margin-left: 50px;
 }
 
 .title-contact {
