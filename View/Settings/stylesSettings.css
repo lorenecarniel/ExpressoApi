@@ -21,9 +21,10 @@
 }
 
 #card-body-settings {
+  background-color: white;
   display: flex;
   align-items: center;
-  background-color: white;
+  justify-content: space-evenly;
 }
 
 .card-body-a {
@@ -69,6 +70,10 @@
   width: 60%;
 }
 
+.config-props {
+  width: 40rem;
+}
+
 div#card-provedor {
   width: inherit;
   margin-top: inherit;
@@ -93,7 +98,7 @@ a.btn.btn-primary {
 
 button.btn.btn-primary {
   height: 25px;
-  width: 50px;
+  width: 92px;
   display: flex;
   font-size: 12px;
   align-items: center;
@@ -102,9 +107,10 @@ button.btn.btn-primary {
   border: none;
 }
 
-#buttonConfirm {
-  width: 284px;
-  height: 38px;
+#buttonConfirm,
+#buttonConfirmCancel {
+  width: 140px;
+  height: 30px;
   display: flex;
   font-size: 14px;
   font-weight: 300;
@@ -112,6 +118,11 @@ button.btn.btn-primary {
   margin-bottom: 24px;
   justify-content: center;
   background: var(--color-button);
+}
+
+#buttonConfirm:hover,
+#buttonConfirmCancel:hover {
+  background-color: #0069d9;
 }
 
 /* Formulário */
@@ -193,7 +204,6 @@ main.content {
   display: flex;
   width: fit-content;
   flex-direction: column;
-  margin-bottom: 103px;
 }
 
 h5#modalLabel {

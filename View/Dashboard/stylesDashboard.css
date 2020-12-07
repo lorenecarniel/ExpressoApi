@@ -15,11 +15,11 @@
 
 .card-header {
   padding: 0.7rem;
+  font-size: 16px;
+  color: #083171;
+  font-weight: 600;
   align-items: center;
   justify-content: space-between;
-  font-size: 16px;
-  font-weight: 600;
-  color: #083171;
   background-color: var(--color-input-title);
 }
 
@@ -204,8 +204,14 @@ td {
   padding: 24px;
 }
 
-#padding-modalCorfirm {
+#padding-modalCorfirm,
+#padding-modalCorfirmChoice {
   padding: 12px;
+}
+#padding-modalCorfirmChoice {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #modalCorfirm-header {

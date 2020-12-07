@@ -23,20 +23,16 @@
             </button>
             
             <h1>Configurações</h1>
-
-            <div class="contrast">
-                        <span>Alto contraste</span>
-                        <label class="switch">
-                            <input type="checkbox" src="contrast.png" class="toggle-theme">
-                            <span class="slider round"></span>
-                        </label>   
-                    </div>
-
+            
+            <a class="exit" href="../index.html">
+                <img src="../../assets/icons/log-out.svg" alt="Sair">
+                <span class="ml-3 config-span">Sair</span>
+            </a>
         </header>
         <main class="content">
 
             <!-- Conteúdo Configurações -->
-            <div class="card">
+            <div class="card config-props">
                 <div id="card-settings" class="card-header">
                     Selecione abaixo os provedores
                 </div>
@@ -53,7 +49,7 @@
                 </div>
             </div>
             <br>
-            <div class="card">
+            <div class="card config-props">
                 <div id="card-settings" class="card-header">
                     Seus Provedores
                 </div>
@@ -154,12 +150,12 @@
                                 <span aria-hidden="true"><img src="../../assets/icons/exit.svg" alt=""></span>
                             </button>
                         </div>
-                        <div id="padding-modalCorfirm" class="modal-body">
+                        <div id="padding-modalCorfirmChoice" class="modal-body">
                             <p>Deseja continuar com a exclusão do provedor X?</p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" id="buttonConfirm" class="btn btn-primary buttonRemove">Confirmar</button>
-                            <button type="button" id="buttonCancel" class="btn btn-primary buttonRemove">Cancelar</button>
+                            <button type="button" id="buttonConfirmCancel" class="btn btn-primary buttonRemove">Cancelar</button>
                         </div>
                     </div>
                 </div>

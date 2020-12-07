@@ -20,6 +20,7 @@
   width: 60px;
   top: 5px;
   border-radius: 25px;
+  margin-left: 9px;
 }
 
 .switch input {
@@ -37,7 +38,7 @@
   bottom: 0;
   width: 36px;
   height: 20px;
-  background-color: var(--color-primary);
+  background-color: #fff;
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
@@ -49,7 +50,8 @@
   width: 15px;
   left: 4px;
   bottom: 4px;
-  background-color: #fff;
+  background: no-repeat;
+  background-image: url(../../../assets/icons/contrast.svg);
   -webkit-transition: 0.4s;
   transition: 0.4s;
   top: 2px;
@@ -111,7 +113,7 @@ input:checked + .slider:before {
 
 #page-menu.dark .btn-primary:active,
 #page-menu.dark .btn-primary:hover {
-  background-color: #333333;
+  background-color: #6b6b6b;
 }
 
 #page-menu.dark .grid {
@@ -207,6 +209,14 @@ input:checked + .slider:before {
   background-color: #333333;
 }
 
-#page-menu.dark .contact {
-  background-color: #ffffff;
+#page-menu.dark #contact {
+  background-color: black;
+}
+
+#page-menu.dark a.exit {
+  color: #ffffff;
+}
+
+#page-menu.dark #padding-modalCorfirmChoice {
+  color: #fff;
 }

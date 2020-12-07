@@ -36,11 +36,15 @@
                         <span class="ml-3">Configurações</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../index.html" title="Sair">
-                        <img src="../../assets/icons/log-out.svg" alt="Sair">
-                        <span class="ml-3">Sair</span>
-                    </a>
+                <li class="nav-item fixed-bottom space">
+                <div class="contrast">
+                        <label class="switch">
+                            <input type="checkbox" src="contrast.png" class="toggle-theme">
+                            <span class="slider round"></span>
+                        </label>  
+                        <div><span>Contraste</span></div>
+
+                    </div>
                 </li>
             </ul>
         </nav>
@@ -84,20 +88,20 @@
 
         //Script para contraste
 
-        const inputList = document.querySelectorAll('.toggle-theme');
+        const input = document.querySelector('.toggle-theme');
         const allPage = document.querySelector('#page-menu');
 
-        inputList.forEach(input => input.onchange = toggleDarkMode);
+        input.onchange = toggleDarkMode;
 
         let theme = document.cookie.split('=')[1];
 
         if (theme) {
-            inputList.forEach(input => input.setAttribute('checked', 'true'));
+            input.setAttribute('checked', 'true');
             allPage.classList.add(theme);
         }
 
         function toggleDarkMode() {
-            inputList.forEach(input => input.toggleAttribute('checked'));
+            input.toggleAttribute('checked');
             allPage.classList.toggle('dark');
 
             if (theme) {
