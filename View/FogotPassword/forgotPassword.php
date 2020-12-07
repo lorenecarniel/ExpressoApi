@@ -18,6 +18,8 @@ if(isset($_POST['enviar'])){
                 $headers .= "MIME-Version: 1.0\r\n";
                 $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
                 mail($from, $to, $message, $headers);
+
+                echo "E-mail enviado com sucesso";
                }
                catch(PDOException $e){
                    echo "erro ao enviar email".$e->getMessage();
