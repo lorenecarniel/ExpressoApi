@@ -9,6 +9,11 @@ if(isset($_POST['enviar'])){
     }
     else{
             try{
+                $statment = $connection ->prepare("SELECT  FROM Client WHERE email = $email ");
+                $statment->execute();
+                $result = $statment->fetch();
+
+                if($statment->rowCount()==1){
                 $from = $email;
                 $to = "";
                 $message.= "Email: $email<br>";
@@ -20,9 +25,13 @@ if(isset($_POST['enviar'])){
                 mail($from, $to, $message, $headers);
 
                 echo "E-mail enviado com sucesso";
+                }
+                else{
+                    echo "E-mail não encontrado.";
+                }
                }
                catch(PDOException $e){
-                   echo "erro ao enviar email".$e->getMessage();
+                   echo "Erro ao enviar email".$e->getMessage();
 
                }
 
