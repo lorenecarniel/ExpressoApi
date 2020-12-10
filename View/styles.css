@@ -54,34 +54,34 @@ li:hover:before {
 
 a {
   font-size: 14px;
-  color: #ffffff;
+  color: #ffffff !important;
 }
 
 a:hover {
   color: #0056b3;
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 /* Botão menu */
 .btn-outline-primary {
   width: 10rem;
   font-size: 14px;
-  color: #ffffff;
-  border-color: #ffffff;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
 }
 .btn-outline-primary:hover {
   color: #fff;
-  border-color: #0d47a1;
-  background-color: #0d47a1;
+  border-color: #0d47a1 !important;
+  background-color: #0d47a1 !important;
 }
 
 /* Botão do banner */
 .btn-primary {
-  border: none;
+  border: none !important;
   width: 17rem;
   color: #fff;
   height: 2.5rem;
-  background-color: #0d47a1;
+  background-color: #0d47a1 !important;
   box-shadow: 3px 3px 9px 0px rgba(0, 0, 0, 0.61);
 }
 
@@ -134,8 +134,15 @@ div#navbarNavDropdown {
   justify-content: center;
   background-color: #0d47a1;
 }
+.responsive {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70%;
+}
+
 #about .video {
-  width: 32rem;
+  width: 60%;
   height: 26rem;
   margin-top: -1%;
   object-fit: cover;
@@ -145,11 +152,11 @@ div#navbarNavDropdown {
 }
 
 .card-body {
-  flex: none;
-  width: 350px;
+  width: 50%;
   height: 362px;
   display: flex;
   align-items: center;
+  flex: none !important;
   background: #0056b3;
   justify-content: center;
   border-radius: 0 17px 17px 0;

@@ -1,20 +1,18 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html>
 
 <head>
-
     <meta charset="UTF-8">
     <title>Expresso API</title>
     <link rel="shortcut icon" href="../../assets/images/image-logo.png" />
 
     <!-- Importação de CSS -->
-    <link rel="stylesheet" href="../Settings/stylesSettings.css">
     <link rel="stylesheet" href="../mainStyles.css">
-
+    <link rel="stylesheet" href="../Settings/stylesSettings.css">
 </head>
 
 <body>
-    <!-- Confidurações -->
+    <!-- Configurações -->
     <div class="h-100 tab-pane" id="settings" role="tabpanel">
 
         <header class="header">
@@ -29,6 +27,7 @@
                 <span class="ml-3 config-span">Sair</span>
             </a>
         </header>
+
         <main class="content">
 
             <!-- Conteúdo Configurações -->
@@ -119,7 +118,7 @@
                         <div id="modalCorfirm-header" class="modal-header">
                             <h5 class="modal-title" id="modalLabel">Confirmação de Usuário</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                                <span aria-hidden="true"><img src="../../assets/icons/exit.svg" alt=""></span>
+                                <span aria-hidden="true"><img src="../../assets/icons/exit.svg" alt=" Fechar"></span>
                             </button>
                         </div>
                         <div id="padding-modalCorfirm" class="modal-body">
@@ -147,7 +146,7 @@
                     <div class="modal-content">
                         <div id="modalCorfirm-header" class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                                <span aria-hidden="true"><img src="../../assets/icons/exit.svg" alt=""></span>
+                                <span aria-hidden="true"><img src="../../assets/icons/exit.svg" alt="Fechar"></span>
                             </button>
                         </div>
                         <div id="padding-modalCorfirmChoice" class="modal-body">
@@ -163,7 +162,7 @@
         </main>
     </div>
     
-    <!--Script para Configuração-->
+    <!--Scripts-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 

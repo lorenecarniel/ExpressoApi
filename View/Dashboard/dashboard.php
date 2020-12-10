@@ -1,16 +1,13 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html>
 
 <head>
-
     <meta charset="UTF-8">
     <title>Expresso API</title>
     <link rel="shortcut icon" href="../../assets/images/image-logo.png" />
 
     <!-- Importação de CSS -->
     <link rel="stylesheet" href="../Dashboard/stylesDashboard.css">
-
-
 </head>
 
 <body>
@@ -327,18 +324,15 @@
                 </div>
             </div>
         </main>
-
+        <!-- Chamada do footer - contato -->
         <footer> <?php require "../Home/footer.php" ?></footer>
     </div>
 
-    <!-- Script para Boostrap -->
+    
+    <!--Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
-
-
-    <!--Scripts para Dashboard-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
-
 
     <!--Scricpts dos gráficos-->
     <script src="../../assets/js/chart-bar-sms.js"></script>

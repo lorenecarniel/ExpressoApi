@@ -2,7 +2,6 @@
 <html lang="pt-br">
 
 <head>
-
     <meta charset="UTF-8">
     <title>Expresso API</title>
     <link rel="shortcut icon" href="../../assets/images/image-logo.png" />
@@ -12,7 +11,6 @@
     <link rel="stylesheet" href="./styles/stylesMenu.css">
     <link rel="stylesheet" href="./styles/stylesContrast.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
-
 </head>
 
 <body>
@@ -72,14 +70,11 @@
     </div>
 
     <!-- Scripts -->
-
-    <!-- Script para Boostrap -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <!--Script para menu-->
     <script>
-        // arrow functions
         document.querySelectorAll('.collapse-sidebar')
             .forEach(collapse => {
                 collapse.addEventListener('click', () => {

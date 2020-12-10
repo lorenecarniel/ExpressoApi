@@ -2,11 +2,13 @@
 
 #left-side {
   background: var(--color-primary);
+  width: 45%;
 }
 
 .image-forgot {
-  margin-left: 60px;
+  margin-left: 45px;
   margin-bottom: 20px;
+  width: 63%;
 }
 
 /* Lado direito */
