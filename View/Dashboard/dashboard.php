@@ -1,14 +1,45 @@
+<?php
+    
+    /*Chamando as funções do banco de dados do dashboard */
+    require_once "../../Model/Dashboard/DatabaseDashboard.php";
+    $filter = thisMonthYear();
+    /*Filtro para aparecer mês e ano */
+    if(isset($_POST['submit'])){
+        $search = $_POST['dateDash'];
+    }else{
+        $search = $filter['CURRENTMONTHYEAR'];
+    }
+
+    //Utilizado para guardar a várivel e passar para outra página
+    session_start();
+    $_SESSION['search']=$search;//Data que foi filtrada
+    $clientid = 1;
+    $_SESSION['clientid']=$clientid;//Usuário logado
+
+    //Chamando as funções e classes para mostrar as informações
+    $smsTableInformation = Sms::showTableInformation($search);
+    $smsAverage = Sms::calcAverage($search);
+    $callTableInformation = Calls::showTableInformation($search);
+    $callAverage = Calls::calcAverage($search);
+    
+    //Colocando a data em português
+    setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+?>
+
+
+
+
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
+    <head>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Expresso API</title>
-    <link rel="shortcut icon" href="../../assets/images/image-logo.png" />
+        <meta charset="UTF-8">
+        <title>Expresso API</title>
+        <link rel="shortcut icon" href="../../assets/images/image-logo.png" />
 
-    <!-- Importação de CSS -->
-    <link rel="stylesheet" href="../Dashboard/stylesDashboard.css">
-</head>
+        <!-- Importação de CSS -->
+        <link rel="stylesheet" href="../Dashboard/stylesDashboard.css">
+    </head>
 
     <body>
         <!-- Dashboard -->
@@ -385,23 +416,26 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </main>
-        <!-- Chamada do footer - contato -->
-        <footer> <?php require "../Home/footer.php" ?></footer>
-    </div>
+            </main>
 
-    
-    <!--Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+            <footer> <?php require "../Home/footer.php" ?></footer>
+        </div>
 
-    <!--Scricpts dos gráficos-->
-    <script src="../../assets/js/chart-bar-sms.js"></script>
-    <script src="../../assets/js/chart-bar-call.js"></script>
-    <script src="../../assets/js/chart-doughnut-sms.js"></script>
-    <script src="../../assets/js/chart-doughnut-call.js"></script>
-</body>
+        <!-- Script para Boostrap -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+
+        <!--Scripts para Dashboard-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+        <!--Scricpts dos gráficos-->
+        <script src="../../assets/js/chart-bar-sms.js"></script>
+        <script src="../../assets/js/chart-bar-call.js"></script>
+        <script src="../../assets/js/chart-doughnut-call.js"></script>
+    </body>
 
 </html>
