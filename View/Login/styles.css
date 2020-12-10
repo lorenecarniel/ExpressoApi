@@ -99,3 +99,7 @@ span {
   align-items: center;
   justify-content: center;
 }
+
+img.entregador-responsivo {
+  width: 100%;
+}

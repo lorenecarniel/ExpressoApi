@@ -89,7 +89,14 @@
 
         input.onchange = toggleDarkMode;
 
-        let theme = document.cookie.split('=')[1];
+        let theme;
+    const hasTheme = document.cookie.split(';').map(c => c.trim()).filter(c => c.startsWith('theme'))[0];
+
+if (hasTheme) {
+  theme = hasTheme.split('=')[1];
+}
+
+        console.log(theme);
 
         if (theme) {
             input.setAttribute('checked', 'true');

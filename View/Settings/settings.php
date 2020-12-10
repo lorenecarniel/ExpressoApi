@@ -1,3 +1,41 @@
+<?php
+    require_once "../../Database/conection.php";
+
+    $pdo = Connect::getConnection();
+
+    if (isset($_POST['insert'])) {
+        $usuarioCadastrado = $_POST['username'];
+
+        $res = $pdo->query("SELECT COUNT(*) FROM CLIENTAPI WHERE USERNAME = '$usuarioCadastrado'");
+        $count = $res->fetchColumn();
+
+        if ($count > 0) {
+            echo "Há ".$count." usuarios já cadastrados";
+        }else{
+            
+                $username = $_POST['username'];
+                $password = $_POST['password'];
+                $provedor = $_POST['provedores'];
+                
+                try {
+                    $inserir = $pdo->query("INSERT INTO CLIENTAPI(USERNAME, PASSWORD, CLIENTID) VALUES ('$username','$password','$provedor')");
+                } catch (PDOException $e) {
+                    echo "Erro ao iserir: ".$e->getMessage();
+                }
+            
+        }
+    }
+
+    if (isset($_GET['acao'])&&$_GET['acao']=='del') {
+        $ApiId = $_GET['Id'];
+        try {
+            $stmt = $pdo->query("DELETE FROM CLIENTAPI WHERE APIID = '$ApiId'");
+        } catch (PDOException $e) {
+            echo "Erro: ".$e->getMessage();
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -31,140 +69,92 @@
         <main class="content">
 
             <!-- Conteúdo Configurações -->
-            <div class="card config-props">
-                <div id="card-settings" class="card-header">
-                    Selecione abaixo os provedores
-                </div>
-                <div class="card-body-a">
-                    <div class="card-y1">
-                        <select class="form-control-1">
-                            <option>JAMEF</option>
-                        </select>
+            <div class="card">
+        <div class="card-header">
+          Selecione abaixo os provedores
+        </div>
+        <div class="card-body-a">
+            <div class="card-y1">
+                <form action="./home.php" method="POST">
+                    <select name="provedores" class="form-control-1 col-md-6">
+                        <?php
+                            try {
+                                $sql = $pdo->query("SELECT * FROM API");
+                                if ($sql->execute()) {
+                                    while ($res = $sql->fetch(PDO::FETCH_OBJ)) {
+                                        echo "<option value='$res->NAME'>".$res->NAME."</option>";
+                                    }
+                                }else{
+                                    echo "Erro: não foi possivel listar os registros";
+                                }
+                            } catch (PDOException $e) {
+                                echo "Erro: ".$e->getMessage();
+                            }
+                        ?>
+                    </select>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="nome">Usuario</label>
+                            <input type="text" name="username" class="form-control" placeholder="Usuario" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="password">Senha</label>
+                            <input type="password" name="password" class="form-control" placeholder="Senha" required>
+                        </div>
+                        <div class="card-y2 col-md-6">
+                            <button type="submit" name="insert" class="btn btn-primary">Adicionar</button>
+                        </div>
                     </div>
-                    <div class="card-z"></div>
-                    <div class="card-y2">
-                        <a href="#" class="btn btn-primary addProvider" data-toggle="modal" data-target="#modalConfirmUser">Adicionar</a>
-                    </div>
-                </div>
+                </form>
             </div>
-            <br>
-            <div class="card config-props">
-                <div id="card-settings" class="card-header">
-                    Seus Provedores
-                </div>
-                <div class="card-body" id="card-body-settings">
-                <div class="card-text">
-                            Usuário
-                        </div>
-                        <div class="card-text">
-                            Senha
-                        </div>
-                        <div id="card-provedor" class="card">
-                            <div class="card-body-b">
-                                JAMEF
-                            </div>
-                        </div>
-                        <a href="#" class="btn" data-toggle="modal" data-target="#modalConfirm"><img src="../../assets/icons/delete.svg" alt="Excluir"></a>
-                    </div>
-                    <div class="card-body" id="card-body-settings">
-                    <div class="card-text">
-                            Usuário
-                        </div>
-                        <div class="card-text">
-                            Senha
-                        </div>
-                        <div id="card-provedor" class="card">
-                            <div class="card-body-b">
-                                RTE
-                            </div>
-                        </div>
-                        <a href="#" class="btn" data-toggle="modal" data-target="#modalConfirm"><img src="../../assets/icons/delete.svg" alt="Excluir"></a>
-                    </div>
-                    <div class="card-body" id="card-body-settings">
-                    <div class="card-text">
-                            Usuário
-                        </div>
-                        <div class="card-text">
-                            Senha
-                        </div>
-                        <div id="card-provedor" class="card">
-                            <div class="card-body-b">
-                                JAMEF
-                            </div>
-                        </div>
-                        <a href="#" class="btn" data-toggle="modal" data-target="#modalConfirm"><img src="../../assets/icons/delete.svg" alt="Excluir"></a>
-                    </div>
-                    <div class="card-body" id="card-body-settings">
-                        <div class="card-text">
-                            Usuário
-                        </div>
-                        <div class="card-text">
-                            Senha
-                        </div>
-                        <div id="card-provedor" class="card">
-                            <div class="card-body-b">
-                                RTE
-                            </div>
-                        </div>
-                        <a href="#" class="btn" data-toggle="modal" data-target="#modalConfirm"><img src="../../assets/icons/delete.svg" alt="Excluir"></a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Modal de Confimação de conta -->
-            <div class="modal fade" id="modalConfirmUser" tabindex="-1" role="dialog" aria-labelledby="modalConfirmLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div id="modalCorfirm-header" class="modal-header">
-                            <h5 class="modal-title" id="modalLabel">Confirmação de Usuário</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                                <span aria-hidden="true"><img src="../../assets/icons/exit.svg" alt=" Fechar"></span>
-                            </button>
-                        </div>
-                        <div id="padding-modalCorfirm" class="modal-body">
-                            <form>
-                                <div class="form-group">
-                                    <label for="inputUsuario">Usuário</label>
-                                    <input type="text" class="form-control" id="inputUsuario" placeholder="meu.usuario">
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputPassword">Senha</label>
-                                    <input type="password" class="form-control" id="inputPassword" placeholder="Senha">
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" id="buttonConfirm" class="btn btn-primary bot-a">Confirmar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Modal para "se deseja excluir" -->
-            <div class="modal fade" id="modalConfirm" tabindex="-1" role="dialog" aria-labelledby="modalConfirmLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div id="modalCorfirm-header" class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                                <span aria-hidden="true"><img src="../../assets/icons/exit.svg" alt="Fechar"></span>
-                            </button>
-                        </div>
-                        <div id="padding-modalCorfirmChoice" class="modal-body">
-                            <p>Deseja continuar com a exclusão do provedor X?</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" id="buttonConfirm" class="btn btn-primary buttonRemove">Confirmar</button>
-                            <button type="button" id="buttonConfirmCancel" class="btn btn-primary buttonRemove">Cancelar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
+        </div>
+    </div>
+    <br>
+    <div class="card card-b">
+        <div class="card-header">
+          Seus Provedores
+        </div>
+        <table class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Provedor</th>
+                    <th scope="col">Usuario</th>
+                    <th scope="col">Senha</th>
+                    <th scope="col">Apagar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    try {
+                        $sql = "select * from CLIENTAPI";
+                        $stmt = $pdo->query($sql);
+                        if ($stmt->execute()) {
+                            while ($res = $stmt->fetch(PDO::FETCH_OBJ)) {
+                                echo "<tr>";
+                                echo "<td>".$res->CLIENTID."</td>";
+                                echo "<td>".$res->USERNAME."</td>";
+                                echo "<td>".$res->PASSWORD."</td>";
+                                echo "<td><a href=\"home.php?Id=".$res->APIID."&acao=del\"><img src='../../assets/icons/delete.svg'></a></td>";
+                                echo "</tr>";
+                            }
+                        }else{
+                            echo "Erro: não foi possivel listar os registros";
+                        }
+                    } catch (PDOException $e) {
+                        echo "Erro: ".$e->getMessage();
+                    }
+                ?>
+            </tbody>
+        </table>
+    </div>
         </main>
     </div>
     
     <!--Scripts-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 
 </body>
 

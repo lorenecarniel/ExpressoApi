@@ -226,6 +226,10 @@ input:checked + .slider:before {
   box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.61);
 }
 
+#page-menu.dark .right {
+  background-color: #424242;
+}
+
 /* *Filtro* */
 
 #page-menu.dark #date {
