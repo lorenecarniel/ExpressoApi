@@ -25,6 +25,10 @@
   background-color: var(--color-input-title);
 }
 
+.card-body.SMS{
+  padding: initial;
+}
+
 div#card-header-sms {
   display: flex;
   align-items: center;
@@ -126,7 +130,7 @@ h5 {
 }
 
 .grid-template-columns-4 {
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
 }
 
 /* Select - semana */
@@ -185,8 +189,18 @@ h5 {
   background-color: Transparent;
 }
 
+#submit{
+  border:none;
+  background-color: Transparent;
+}
+
+.formFilter{
+  transform: initial;
+}
+
 .close {
   opacity: 5;
+  cursor: pointer;
 }
 
 #date {
@@ -255,4 +269,38 @@ td {
 
 .align-self-center {
   margin-left: 1.5rem;
+}
+
+#tableSMS tr td{
+  text-align: left;
+}
+
+#tableSMS{
+  margin-top: 15px !important;
+  margin-bottom: 15px !important;
+}
+
+.right{
+  background-color: var(--color-background-cards);
+}
+
+/* Modal - confirmação de e-mail */
+.modal-body {
+  padding: 24px;
+}
+
+#padding-modalCorfirm {
+  padding: 12px;
+}
+
+#modalCorfirm-header {
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column-reverse;
+}
+
+.modal-content {
+  background-color: var(--color-background);
 }
