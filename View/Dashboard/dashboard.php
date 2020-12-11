@@ -1,5 +1,4 @@
 <?php
-    
     /*Chamando as funções do banco de dados do dashboard */
     require_once "../../Model/Dashboard/DatabaseDashboard.php";
     $filter = thisMonthYear();
@@ -13,14 +12,13 @@
     //Utilizado para guardar a várivel e passar para outra página
     session_start();
     $_SESSION['search']=$search;//Data que foi filtrada
-    $clientid = 1;
-    $_SESSION['clientid']=$clientid;//Usuário logado
+    $clientid = $_SESSION['clientid'];
 
     //Chamando as funções e classes para mostrar as informações
-    $smsTableInformation = Sms::showTableInformation($search);
-    $smsAverage = Sms::calcAverage($search);
-    $callTableInformation = Calls::showTableInformation($search);
-    $callAverage = Calls::calcAverage($search);
+    $smsTableInformation = Sms::showTableInformation($search,$clientid);
+    $smsAverage = Sms::calcAverage($search,$clientid);
+    $callTableInformation = Calls::showTableInformation($search,$clientid);
+    $callAverage = Calls::calcAverage($search,$clientid);
     
     //Colocando a data em português
     setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
@@ -52,7 +50,7 @@
             
             <h1>Dashboard</h1>
             
-            <a class="exit" href="../index.html">
+            <a class="exit" href="../../Model/exit.php">
                 <img src="../../assets/icons/log-out.svg" alt="Sair">
                 <span class="ml-3 config-span">Sair</span>
             </a>
@@ -90,33 +88,15 @@
 
                                                 <tr>
                                                     <td>Quantidade</td>
-                                                    <td class="right"><?php 
-                                                        if(isset($smsTableInformation['SMSCREDITS'])){
-                                                            echo $smsTableInformation['SMSCREDITS'];
-                                                        }else{
-                                                            echo 0; 
-                                                        }
-                                                    ?></td>
+                                                    <td class="right"><?php echo $smsTableInformation['SMSCREDITS']; ?></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Disponivel</td>
-                                                    <td class="item top first right"><?php 
-                                                        if(isset($smsTableInformation['AVAILABLE'])){
-                                                            echo $smsTableInformation['AVAILABLE'];
-                                                        }else{
-                                                            echo 0; 
-                                                        }
-                                                    ?></td>
+                                                    <td class="item top first right"><?php echo $smsTableInformation['AVAILABLE'];?></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Utilizado</td>
-                                                    <td class="item top second right"><?php 
-                                                    if(isset($smsTableInformation['USED'])){
-                                                        echo $smsTableInformation['USED'];
-                                                    }else{
-                                                        echo 0; 
-                                                    }
-                                                    ?></td>
+                                                    <td class="item top second right"><?php echo $smsTableInformation['USED'];?></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Valor por mensagem</td>
@@ -139,13 +119,7 @@
 
                                         <!--Gráfico em barras -->
                                         <div class="card-body" id="card-body-sms"><canvas id="myBarChartSms" width="100%" height="50"></canvas></div>
-                                        <div class="average-use">USO MÉDIO DE SMS: <?php 
-                                            if(isset($smsAverage)){
-                                                echo $smsAverage;
-                                            }else{
-                                                echo 0; 
-                                            }
-                                        ?></div>
+                                        <div class="average-use">USO MÉDIO DE SMS: <?php echo $smsAverage;?></div>
                                     </div>
                                 </div>
 
@@ -167,42 +141,22 @@
 
                                         <!--Grid-->
                                         <section class="grid grid-template-columns-4">
+                                            <div class="item top first"><?php echo $callTableInformation['REQUESTSQUANTITY'];?></div>
                                             <div class="item top first"><?php 
-                                                if(isset($callTableInformation['REQUESTSQUANTITY'])){
-                                                    echo $callTableInformation['REQUESTSQUANTITY'];
+                                                if($callTableInformation['AVAILABLE']<0){
+                                                    echo 0;
                                                 }else{
-                                                    echo 0; 
+                                                    echo $callTableInformation['AVAILABLE'];
                                                 }
                                             ?></div>
-                                            <div class="item top first"><?php 
-                                                if(isset($callTableInformation['AVAILABLE'])){
-                                                    if($callTableInformation['AVAILABLE']<0){
-                                                        echo 0;
-                                                    }else{
-                                                        echo $callTableInformation['AVAILABLE'];
-                                                    }
-                                                }else{
-                                                    echo 0; 
-                                                }
-                                            ?></div>
-                                            <div class="item top second"><?php 
-                                                if(isset($callTableInformation['USED'])){
-                                                    echo $callTableInformation['USED'];
-                                                }else{
-                                                    echo 0; 
-                                                }
-                                            ?></div>
+                                            <div class="item top second"><?php echo $callTableInformation['USED'];?></div>
                                             <div class="item top third"><?php 
-                                                if(isset($callTableInformation['AVAILABLE'])){
-                                                    if($callTableInformation['AVAILABLE']<0){
-                                                        $plusCall = -$callTableInformation['AVAILABLE'];
-                                                        echo $plusCall;
-                                                    }else{
-                                                        $plusCall = 0;
-                                                        echo $plusCall;
-                                                    }
+                                                if($callTableInformation['AVAILABLE']<0){
+                                                    $plusCall = -$callTableInformation['AVAILABLE'];
+                                                    echo $plusCall;
                                                 }else{
-                                                    echo 0; 
+                                                    $plusCall = 0;
+                                                    echo $plusCall;
                                                 }
                                             ?></div>
                                             <div class="item down first">CONTRATADO</div>
@@ -221,33 +175,15 @@
 
                                         <tr>
                                             <td>Nome do plano</td>
-                                            <td><?php 
-                                                if(isset($callTableInformation['NAME'])){
-                                                    echo $callTableInformation['NAME'];
-                                                }else{
-                                                    echo 0; 
-                                                }
-                                            ?></td>
+                                            <td><?php echo $callTableInformation['NAME'];?></td>
                                         </tr>
                                         <tr>
                                             <td>Valor mensal</td>
-                                            <td>R$ <?php 
-                                                if(isset($callTableInformation['PRICE'])){
-                                                    echo $callTableInformation['PRICE'];
-                                                }else{
-                                                    echo 0; 
-                                                }
-                                            ?></td>
+                                            <td>R$ <?php echo $callTableInformation['PRICE']; ?></td>
                                         </tr>
                                         <tr>
                                             <td>Valor por chamada</td>
-                                            <td>R$ <?php 
-                                                if(isset($callTableInformation['VALUECALL'])){
-                                                    echo $callTableInformation['VALUECALL'];
-                                                }else{
-                                                    echo 0; 
-                                                }
-                                            ?></td>
+                                            <td>R$ <?php echo $callTableInformation['VALUECALL'];?></td>
                                         </tr>
                                     </table>
 
@@ -260,13 +196,7 @@
 
                                         <!--Gráfico em barras -->
                                         <div class="card-body"><canvas id="myBarChartCall" width="100%" height="50"></canvas></div>
-                                        <div class="average-use">MÉDIA DE CHAMADAS MENSAIS: <?php 
-                                            if(isset($callAverage)){
-                                                echo $callAverage;
-                                            }else{
-                                                echo 0; 
-                                            }
-                                        ?></div>
+                                        <div class="average-use">MÉDIA DE CHAMADAS MENSAIS: <?php echo $callAverage;?></div>
                                     </div>
                                 </div>
                             </div>
@@ -276,7 +206,7 @@
 
                 <?php
                     require_once "../../Model/Dashboard/MoreInformations.php";
-                    $moreCallTableInformation = MoreCallsInformation::showTableInformation($search);
+                    $moreCallTableInformation = MoreCallsInformation::showTableInformation($search,$clientid);
                 ?>
 
 
@@ -303,27 +233,9 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td><?php 
-                                                    if(isset($moreCallTableInformation['NAME'])){
-                                                        echo $moreCallTableInformation['NAME'];
-                                                    }else{
-                                                        echo 0; 
-                                                    }
-                                                ?></td>
-                                                <td>R$ <?php 
-                                                    if(isset($moreCallTableInformation['PRICE'])){
-                                                        echo $moreCallTableInformation['PRICE'];
-                                                    }else{
-                                                        echo 0; 
-                                                    }
-                                                ?></td>
-                                                <td>R$ <?php 
-                                                    if(isset($moreCallTableInformation['VALUECALL'])){
-                                                        echo $moreCallTableInformation['VALUECALL'];
-                                                    }else{
-                                                        echo 0; 
-                                                    }
-                                                ?></td>
+                                                <td><?php echo $moreCallTableInformation['NAME'];?></td>
+                                                <td>R$ <?php echo $moreCallTableInformation['PRICE'];?></td>
+                                                <td>R$ <?php echo $moreCallTableInformation['VALUECALL'];?></td>
                                                 <td>1000</td>
                                             </tr>
                                         </tbody>
@@ -344,69 +256,34 @@
                                         </thead>
                                         <tbody>
                                             <tr>
+                                                <td><?php echo $moreCallTableInformation['REQUESTSQUANTITY'];?></td>
+                                                <td><?php echo $moreCallTableInformation['USED'];?></td>
                                                 <td><?php 
-                                                    if(isset($moreCallTableInformation['REQUESTSQUANTITY'])){
-                                                        echo $moreCallTableInformation['REQUESTSQUANTITY'];
-                                                    }else{
+                                                    if($moreCallTableInformation['AVAILABLE']<0){
                                                         echo 0; 
+                                                    }else{
+                                                        echo $moreCallTableInformation['AVAILABLE'];
                                                     }
                                                 ?></td>
                                                 <td><?php 
-                                                    if(isset($moreCallTableInformation['USED'])){
-                                                        echo $moreCallTableInformation['USED'];
+                                                    if($moreCallTableInformation['AVAILABLE']<0){
+                                                        $moreCallPlus = -$moreCallTableInformation['AVAILABLE'];
+                                                        echo $moreCallPlus;
                                                     }else{
-                                                        echo 0; 
-                                                    }
-                                                ?></td>
-                                                <td><?php 
-                                                    if(isset($moreCallTableInformation['AVAILABLE'])){
-                                                        if($moreCallTableInformation['AVAILABLE']<0){
-                                                            echo 0; 
-                                                        }else{
-                                                            echo $moreCallTableInformation['AVAILABLE'];
-                                                        }
-                                                    }else{
-                                                        echo 0; 
-                                                    }
-                                                ?></td>
-                                                <td><?php 
-                                                    if(isset($moreCallTableInformation['AVAILABLE'])){
-                                                        if($moreCallTableInformation['AVAILABLE']<0){
-                                                            $moreCallPlus = -$moreCallTableInformation['AVAILABLE'];
-                                                            echo $moreCallPlus;
-                                                        }else{
-                                                            $moreCallPlus = 0;
-                                                            echo $moreCallPlus;
-                                                        }
-                                                    }else{
-                                                        echo 0; 
-                                                    }
-                                                        
+                                                        $moreCallPlus = 0;
+                                                        echo $moreCallPlus;
+                                                    }                                               
                                                     ?></td>
+                                                <td>R$ <?php echo $moreCallTableInformation['PRICE'];?></td>
                                                 <td>R$ <?php 
-                                                    if(isset($moreCallTableInformation['PRICE'])){
-                                                        echo $moreCallTableInformation['PRICE'];
-                                                    }else{
-                                                        echo 0; 
-                                                    }
-                                                ?></td>
-                                                <td>R$ <?php 
-                                                    if(isset($moreCallTableInformation['VALUECALL'])){
                                                         $plusValueCall = $moreCallTableInformation['VALUECALL'];
                                                         $moreCallPlusValue = MoreCallsInformation::calcValuePlus($moreCallPlus,$plusValueCall);
                                                         echo $moreCallPlusValue;
-                                                    }else{
-                                                        echo 0; 
-                                                    }
                                                 ?></td>
                                                 <td>R$ <?php 
-                                                    if(isset($moreCallTableInformation['PRICE'])){
                                                         $priceCalls = $moreCallTableInformation['PRICE'];
                                                         $moreCallTotalValue = MoreCallsInformation::calcTotal($priceCalls,$moreCallPlusValue); 
                                                         echo $moreCallTotalValue;
-                                                    }else{
-                                                        echo 0; 
-                                                    }
                                                 ?></td>
                                             </tr>
                                         </tbody>

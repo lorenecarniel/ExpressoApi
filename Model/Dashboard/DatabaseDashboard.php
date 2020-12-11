@@ -3,23 +3,30 @@
 
     class Sms{
         //Calcular uso médio de consumo mensal
-        public static function calcAverage($dateSms){
+        public static function calcAverage($dateSms,$user){
             try{
+                $restYear = substr($dateSms, 0,4);
+                $restMonth = substr($dateSms, 5,2);
                 $rest = substr($dateSms, 0,4);
-                $user = 1;
                 $conectClientPlan = Connect::getConnection();
-                $sqlCalcSMS = $conectClientPlan->query("SELECT COUNT(DISTINCT CR.DTREQUEST) AS TOTALDATES, COUNT(DISTINCT MONTH(CR.DTREQUEST)) AS TOTALMONTH , 
-                MONTH(CR.DTREQUEST) AS MONTH,YEAR(CR.DTREQUEST) AS YEAR,COUNT(CR.CLIENTID) AS USED
-                    FROM CLIENTPLAN CP, CLIENTAPIREQUEST CR
-                    WHERE CR.CLIENTID = CP.CLIENTID AND CP.CLIENTID = $user AND CR.URL = '/api/sms/send' AND CR.DTREQUEST LIKE '%$rest%'
+                $sqlCalcSMS = $conectClientPlan->query("SELECT ISNULL(COUNT(DISTINCT CR.DTREQUEST),0) AS TOTALDATES, ISNULL(COUNT(DISTINCT MONTH(CR.DTREQUEST)),0) AS TOTALMONTH, 
+                    $restMonth AS MONTH,$restYear AS YEAR,ISNULL(COUNT(CR.CLIENTID),0) AS USED
+                    FROM CLIENTPLAN CP
+                    LEFT OUTER JOIN CLIENTAPIREQUEST CR ON CR.CLIENTID = CP.CLIENTID AND CP.CLIENTID = $user AND CR.URL = '/api/sms/send' AND CR.DTREQUEST LIKE '%$rest%'
                     GROUP BY MONTH(CR.DTREQUEST),YEAR(CR.DTREQUEST);");
                     $averageMonthsSMS = 0;
                     $countMonthsSMS = 0;
                 while($clientPlanLine = $sqlCalcSMS->fetch(PDO::FETCH_ASSOC)) {
                     $countMonthsSMS +=$clientPlanLine['TOTALMONTH'];//somando a quatidade de meses
-                    $averageMonthsSMS += $clientPlanLine['USED']/$clientPlanLine['TOTALDATES'];//calculando a media do uso de cada mês e somando o resultado
+                    if($clientPlanLine['USED']!=0 ||$clientPlanLine['TOTALDATES']!=0){
+                        $averageMonthsSMS += $clientPlanLine['USED']/$clientPlanLine['TOTALDATES'];//calculando a media do uso de cada mês e somando o resultado
+                    }
                 }
-                $averageSMS = $averageMonthsSMS/$countMonthsSMS;//calculando a média mensal
+                if($averageMonthsSMS==0 && $countMonthsSMS==0){
+                    $averageSMS=0;
+                }else{
+                    $averageSMS = $averageMonthsSMS/$countMonthsSMS;//calculando a média mensal
+                }
                 $averageFormat = number_format($averageSMS, 2, '.', '');//formatando o resultado para mostrar duas casas
                 return $averageFormat;
             }catch(Exception $e){
@@ -30,14 +37,17 @@
         }
     
         //Mostrar informações na tabela
-        public static function showTableInformation($date){
+        public static function showTableInformation($date,$user){
             try{
-                $user = 1;
+                $restYear = substr($date, 0,4);
+                $restMonth = substr($date, 5,2);
                 $conectClientPlan = Connect::getConnection();
-                $sqlTableInfomationSms =$conectClientPlan->query("SELECT MONTH(CR.DTREQUEST) AS MONTH,YEAR(CR.DTREQUEST) AS YEAR,CP.SMSCREDITS, COUNT(CR.CLIENTID) AS USED,(CP.SMSCREDITS -COUNT(CR.CLIENTID)) AS AVAILABLE
-                FROM CLIENTPLAN CP, CLIENTAPIREQUEST CR
-                WHERE CR.CLIENTID = CP.CLIENTID AND CP.CLIENTID = $user AND CR.URL ='/api/sms/send' AND CR.DTREQUEST LIKE '%$date%'
-                GROUP BY CP.SMSCREDITS,MONTH(CR.DTREQUEST),YEAR(CR.DTREQUEST);");
+                $sqlTableInfomationSms =$conectClientPlan->query("SELECT $restMonth AS MONTH,$restYear AS YEAR,IIF(COUNT(CR.CLIENTID)=0,0,CP.SMSCREDITS) AS SMSCREDITS, 
+                ISNULL(COUNT(CR.CLIENTID),0) AS USED,(CP.SMSCREDITS - IIF(COUNT(CR.CLIENTID)=0,CP.SMSCREDITS,COUNT(CR.CLIENTID))) AS AVAILABLE
+                FROM CLIENTPLAN CP 
+                LEFT OUTER JOIN CLIENTAPIREQUEST CR ON CR.CLIENTID = CP.CLIENTID AND CP.CLIENTID = $user AND CR.URL ='/api/sms/send' AND CR.DTREQUEST LIKE '%$date%'
+                GROUP BY CP.SMSCREDITS,MONTH(CR.DTREQUEST),YEAR(CR.DTREQUEST)
+                ");
                 $clientPlan = $sqlTableInfomationSms->fetchAll()[0];
                 return $clientPlan;
             }catch (Exception $e) {
@@ -51,23 +61,29 @@
 
     class Calls{
         //Calcular uso médio de consumo mensal
-        public static function calcAverage($dateCall){
+        public static function calcAverage($dateCall,$user){
             try{
-                $rest = substr($dateCall, 0,4);
-                $user = 1;
+                $restYear = substr($dateCall, 0,4);
+                $restMonth = substr($dateCall, 5,2);
                 $conectClientPlan = Connect::getConnection();
-                $sqlCalcCalls = $conectClientPlan->query("SELECT COUNT(DISTINCT CR.DTREQUEST) AS TOTALDATES, COUNT(DISTINCT MONTH(CR.DTREQUEST)) AS TOTALMONTH , 
-                MONTH(CR.DTREQUEST) AS MONTH,YEAR(CR.DTREQUEST) AS YEAR,COUNT(CR.CLIENTID) AS USED
-                    FROM CLIENTPLAN CP, CLIENTAPIREQUEST CR
-                    WHERE CR.CLIENTID = CP.CLIENTID AND CP.CLIENTID = $user AND CR.URL <>'/api/sms/send' AND CR.DTREQUEST LIKE '%$rest%'
+                $sqlCalcCalls = $conectClientPlan->query("SELECT ISNULL(COUNT(DISTINCT CR.DTREQUEST),0) AS TOTALDATES, ISNULL(COUNT(DISTINCT MONTH(CR.DTREQUEST)),0) AS TOTALMONTH, 
+                    $restMonth AS MONTH,$restYear AS YEAR,ISNULL(COUNT(CR.CLIENTID),0) AS USED
+                    FROM CLIENTPLAN CP
+                    LEFT OUTER JOIN CLIENTAPIREQUEST CR ON CR.CLIENTID = CP.CLIENTID AND CP.CLIENTID = $user AND CR.URL <>'/api/sms/send' AND CR.DTREQUEST LIKE '%$restYear%'
                     GROUP BY MONTH(CR.DTREQUEST),YEAR(CR.DTREQUEST);");
                     $averageMonths = 0;
                     $countMonths = 0;
                 while($clientPlanLine = $sqlCalcCalls->fetch(PDO::FETCH_ASSOC)) {
                     $countMonths +=$clientPlanLine['TOTALMONTH'];//somando a quatidade de meses
-                    $averageMonths += $clientPlanLine['USED']/$clientPlanLine['TOTALDATES'];//calculando a media do uso de cada mês e somando o resultado
+                    if($clientPlanLine['USED']!=0 ||$clientPlanLine['TOTALDATES']!=0){
+                        $averageMonths += $clientPlanLine['USED']/$clientPlanLine['TOTALDATES'];//calculando a media do uso de cada mês e somando o resultado
+                    }
                 }
-                $average = $averageMonths/$countMonths;//calculando a média mensal
+                if($averageMonths==0 && $countMonths==0){
+                    $average=0;
+                }else{
+                    $average = $averageMonths/$countMonths;//calculando a média mensal
+                }
                 $averageFormat = number_format($average, 2, '.', '');//formatando o resultado para mostrar duas casas
                 return $averageFormat;
             }catch(Exception $e){
@@ -78,15 +94,21 @@
         }
 
         //Mostrar informações na tabela
-        public static function showTableInformation($datecall){
+        public static function showTableInformation($datecall,$user){
             try{
-                $user = 1;
+                $restYear = substr($datecall, 0,4);
+                $restMonth = substr($datecall, 5,2);
                 $conectClientPlan = Connect::getConnection();
-                $sqlTableInfomationCall =$conectClientPlan->query("SELECT MONTH(CR.DTREQUEST) AS MONTH,YEAR(CR.DTREQUEST) AS YEAR,COUNT(CR.CLIENTID) AS USED,P.NAME,P.PRICE,P.REQUESTSQUANTITY,(P.REQUESTSQUANTITY -COUNT(CR.CLIENTID)) AS AVAILABLE,
-                CONVERT(DECIMAL(10,2),(P.PRICE/P.REQUESTSQUANTITY)) AS VALUECALL
-                FROM CLIENTPLAN CP, [PLAN] P, CLIENTAPIREQUEST CR
-                WHERE P.ID = CP.PLANID AND CR.CLIENTID = CP.CLIENTID AND CP.CLIENTID = $user AND CR.URL <> '/api/sms/send' AND CR.DTREQUEST LIKE '%$datecall%'
+
+                $sqlTableInfomationCall =$conectClientPlan->query("SELECT $restMonth AS MONTH,$restYear AS YEAR,ISNULL(COUNT(CR.CLIENTID),0) AS USED,
+                IIF(COUNT(CR.CLIENTID)=0,'0',P.NAME) AS NAME,IIF(COUNT(CR.CLIENTID)=0,0,P.PRICE) AS PRICE,
+                IIF(COUNT(CR.CLIENTID)=0,0,P.REQUESTSQUANTITY) AS REQUESTSQUANTITY,(P.REQUESTSQUANTITY - IIF(COUNT(CR.CLIENTID)=0,P.REQUESTSQUANTITY,COUNT(CR.CLIENTID))) AS AVAILABLE,
+                IIF(COUNT(CR.CLIENTID)=0,0,CONVERT(DECIMAL(10,2),(P.PRICE /P.REQUESTSQUANTITY))) AS VALUECALL
+                FROM CLIENTPLAN CP
+                LEFT OUTER JOIN [PLAN] P ON P.ID = CP.PLANID
+                LEFT OUTER JOIN CLIENTAPIREQUEST CR ON CR.CLIENTID = CP.CLIENTID AND CP.CLIENTID = $user AND CR.URL <> '/api/sms/send' AND CR.DTREQUEST LIKE '%$datecall%'
                 GROUP BY P.NAME,P.PRICE,P.REQUESTSQUANTITY,MONTH(CR.DTREQUEST),YEAR(CR.DTREQUEST);");
+
                 $clientPlan = $sqlTableInfomationCall->fetchAll()[0];
                 return $clientPlan;
             }catch (Exception $e) {
@@ -96,6 +118,8 @@
              }
         }
     }
+
+    //Ver mês e ano atual
     function thisMonthYear(){
         try{
             $conect = Connect::getConnection();
