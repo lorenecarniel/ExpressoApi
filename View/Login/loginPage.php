@@ -1,3 +1,9 @@
+<?php
+    session_start();
+    if($_SESSION['clientid']!=0){
+      header("location:../Home/home.php");
+    }
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -16,9 +22,7 @@
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
     />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
   </head>
-
   <body>
     <!-- Divisão da tela -->
     <div class="container-fluid">
@@ -37,21 +41,15 @@
 
         <!-- Lado direito -->
         <div id="right-side" class="col">
-          <form>
+          <form method="POST" action="../../Model/Login/login.php">
             <span>Conecte-se</span>
 
-            <div class="form-group" method="post" action="login.php">
+            <div class="form-group">
               <label for="inputEmail">Email</label>
-              <input
-                type="email"
-                class="form-control"
-                id="inputEmail"
-                name="email"
-                placeholder="meuemail@teste.com"
-              />
+              <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Email" required/>
             </div>
 
-            <div class="form-group" method="post" action="login.php">
+            <div class="form-group">
               <label>Senha</label>
 
               <div class="input-group" id="show_hide_password">
@@ -61,6 +59,7 @@
                   id="inputPassword"
                   name="password"
                   placeholder="senha"
+                  required
                 />
                 <div class="input-group-addon">
                   <a href=""
@@ -71,9 +70,8 @@
             </div>
 
             <button
-              type="button"
+              type="submit"
               class="btn btn-primary"
-              onclick="changePage()"
             >
               Entrar
             </button>
@@ -98,8 +96,8 @@
     <script src="https://use.fontawesome.com/b9bdbd120a.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Script para esconder e visualizar senha -->
@@ -120,11 +118,6 @@
           }
         });
       });
-
-      // Script para mudar de página
-      function changePage() {
-        location.href = "../Home/home.php";
-      }
     </script>
   </body>
 </html>
