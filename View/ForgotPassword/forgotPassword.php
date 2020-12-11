@@ -11,7 +11,7 @@ if(isset($_POST['enviar'])){
             try{//checar se o email existe
                 $email = $_POST['email'];
                 $connection = Connect::getConnection();
-                $statment = $connection ->prepare("SELECT * FROM CLIENT WHERE EMAIL = '$email'");
+                $statment = $connection ->prepare("SELECT EMAIL FROM CLIENT WHERE EMAIL = '$email'");
                 $statment->execute();
                 
                 // se o email existir enviar o email solicitando troca de senha
