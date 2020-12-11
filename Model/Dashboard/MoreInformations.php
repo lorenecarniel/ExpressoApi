@@ -9,16 +9,17 @@
                 $restYear = substr($date, 0,4);
                 $restMonth = substr($date, 5,2);
                 try{
+                    //Excutando a função que já está criada
                     $sqlTableInfomationCall =$conectClientPlan->query("SELECT * FROM GetMoreInformationTableInformation ('$restYear','$restMonth',$user,'$date')");
                     $clientPlan = $sqlTableInfomationCall->fetchAll()[0];
                     return $clientPlan;
                 }catch (Exception $e){
+                    //caso não exita criar a função
                     $sqlCreateFunctionCall = $conectClientPlan->prepare("CREATE FUNCTION GetMoreInformationTableInformation(@Year nvarchar(4),@Month nvarchar(2),@User int,@full nvarchar(7))
                     RETURNS TABLE 
                     AS
                     RETURN 
                     (
-                        -- Add the SELECT statement with parameter references here
                         SELECT @Month AS MONTH,@Year AS YEAR,ISNULL(COUNT(CR.CLIENTID),0) AS USED,
                         IIF(COUNT(CR.CLIENTID)=0,'0',P.NAME) AS NAME,IIF(COUNT(CR.CLIENTID)=0,0,P.PRICE) AS PRICE,
                         IIF(COUNT(CR.CLIENTID)=0,0,P.REQUESTSQUANTITY) AS REQUESTSQUANTITY,(P.REQUESTSQUANTITY - IIF(COUNT(CR.CLIENTID)=0,P.REQUESTSQUANTITY,COUNT(CR.CLIENTID))) AS AVAILABLE,
@@ -29,6 +30,7 @@
                         GROUP BY P.NAME,P.PRICE,P.REQUESTSQUANTITY,MONTH(CR.DTREQUEST),YEAR(CR.DTREQUEST)
                     )");
                     $sqlCreateFunctionCall->execute();
+                    //Excutando a função que foi criada
                     $sqlTableInfomation = $conectClientPlan->query("SELECT * FROM GetMoreInformationTableInformation ('$restYear','$restMonth',$user,'$date')");
                     $result = $sqlTableInfomation->fetchAll()[0];
                     return $result;
@@ -41,6 +43,7 @@
              
         }
 
+        //Calcular valor extra
         public static function calcValuePlus($plusCall,$plusValue){
             try{
                 $result = $plusCall*$plusValue;
@@ -53,6 +56,7 @@
             }
         }
 
+        //calcular valor total
         public static function calcTotal($priceCalls,$plusValue){
             try{
                 $total = $priceCalls + $plusValue;

@@ -1,7 +1,10 @@
 <?php
     session_start();
-    if($_SESSION['clientid']!=0){
-      header("location:../Home/home.php");
+    //verifica se há algum usuário logando antes de mostrar a loginPage
+    if(isset($_SESSION['clientid'])){
+      if($_SESSION['clientid']!=0){
+        header("location:../Home/home.php");
+      }
     }
 ?>
 <!DOCTYPE html>
