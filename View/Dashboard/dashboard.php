@@ -12,7 +12,7 @@
     //Utilizado para guardar a várivel e passar para outra página
     session_start();
     $_SESSION['search']=$search;//Data que foi filtrada
-    $clientid = $_SESSION['clientid'];
+    $clientid = $_SESSION['clientid'];//Coloca o Usuário logado dentro da Variavel
 
     //Chamando as funções e classes para mostrar as informações
     $smsTableInformation = Sms::showTableInformation($search,$clientid);
