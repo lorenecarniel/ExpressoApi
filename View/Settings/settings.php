@@ -60,7 +60,7 @@
         </div>
         <div class="card-body-a">
             <div class="card-y1">
-                <form action="./home.php" method="POST">
+                <form action="" method="POST">
                     <select name="provedores" class="form-control-1 col-md-6">
                         <?php
                             try {
