@@ -200,6 +200,10 @@ h5 {
   background-color: Transparent;
 }
 
+#submit:focus {
+  outline: none;
+}
+
 .formFilter {
   transform: initial;
 }

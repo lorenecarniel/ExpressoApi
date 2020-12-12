@@ -166,8 +166,13 @@ button.btn.btn-primary {
   font-weight: 500 !important;
 }
 
-form {
-  transform: translateX(95px);
+#buttonDelete{
+  border: none;
+  background-color: Transparent;
+}
+
+#buttonDelete:focus {
+  outline: none;
 }
 
 /* Modal */
