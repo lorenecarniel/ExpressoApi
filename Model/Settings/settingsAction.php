@@ -39,21 +39,6 @@
                 echo "Erro: ".$e->getMessage();
             }
         }        
-
-        public static function showTableInformationProviderClient($user){
-            try {
-                $pdo = Connect::getConnection();
-                $sql = "SELECT CLIENTID,APIID,USERNAME,PASSWORD,NAME
-                FROM CLIENTAPI ,API 
-                WHERE API.ID = CLIENTAPI.APIID AND CLIENTID = $user;";
-                $stmt = $pdo->query($sql);
-                $stmt->execute();
-                $res = $stmt->fetchAll();
-                return $res;
-            } catch (PDOException $e) {
-                echo "Erro: ".$e->getMessage();
-            }
-        }
     }
 
 ?>
