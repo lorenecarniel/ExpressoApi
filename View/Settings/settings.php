@@ -112,9 +112,9 @@
             <tbody>
                 <?php
                     try {
-                        $sql = "SELECT C.CLIENTID,C.APIID,C.USERNAME,C.PASSWORD,A.NAME
-                        FROM CLIENTAPI C,API A
-                        WHERE A.ID = C.APIID;";
+                        $sql = "SELECT CLIENTID,APIID,USERNAME,PASSWORD,NAME
+                        FROM CLIENTAPI ,API
+                        WHERE API.ID = CLIENTAPI.APIID AND CLIENTID = $clientid;";
                         $stmt = $pdo->query($sql);
                         if ($stmt->execute()) {
                             while ($res = $stmt->fetch(PDO::FETCH_OBJ)) {
