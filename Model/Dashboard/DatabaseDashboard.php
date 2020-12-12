@@ -38,18 +38,39 @@
     
         //Mostrar informações na tabela
         public static function showTableInformation($date,$user){
+            
+            
             try{
                 $restYear = substr($date, 0,4);
                 $restMonth = substr($date, 5,2);
                 $conectClientPlan = Connect::getConnection();
-                $sqlTableInfomationSms =$conectClientPlan->query("SELECT $restMonth AS MONTH,$restYear AS YEAR,IIF(COUNT(CR.CLIENTID)=0,0,CP.SMSCREDITS) AS SMSCREDITS, 
-                ISNULL(COUNT(CR.CLIENTID),0) AS USED,(CP.SMSCREDITS - IIF(COUNT(CR.CLIENTID)=0,CP.SMSCREDITS,COUNT(CR.CLIENTID))) AS AVAILABLE
-                FROM CLIENTPLAN CP 
-                LEFT OUTER JOIN CLIENTAPIREQUEST CR ON CR.CLIENTID = CP.CLIENTID AND CP.CLIENTID = $user AND CR.URL ='/api/sms/send' AND CR.DTREQUEST LIKE '%$date%'
-                GROUP BY CP.SMSCREDITS,MONTH(CR.DTREQUEST),YEAR(CR.DTREQUEST)
-                ");
-                $clientPlan = $sqlTableInfomationSms->fetchAll()[0];
-                return $clientPlan;
+                try{
+                    //Fazendo a consulta no banco
+                    $sqlTableInfomationSms =$conectClientPlan->query("SELECT * FROM GetDasboardTableInformationSms ('$restYear','$restMonth',$user,'$date')");
+                    $clientPlan = $sqlTableInfomationSms->fetchAll()[0];
+                    return $clientPlan;
+                }catch(Exception $e){
+                    //caso de erro criar a função no banco de dados
+                    $sqlCreateFunctionSms = $conectClientPlan->prepare("CREATE FUNCTION GetDasboardTableInformationSms(@Year nvarchar(4),@Month nvarchar(2),@User int,@full nvarchar(7))
+                    RETURNS TABLE 
+                    AS
+                    RETURN 
+                    (
+                        SELECT @Month AS MONTH,@Year AS YEAR,IIF(COUNT(CR.CLIENTID)=0,0,CP.SMSCREDITS) AS SMSCREDITS, 
+                        ISNULL(COUNT(CR.CLIENTID),0) AS USED,(CP.SMSCREDITS - IIF(COUNT(CR.CLIENTID)=0,CP.SMSCREDITS,COUNT(CR.CLIENTID))) AS AVAILABLE
+                        FROM CLIENTPLAN CP 
+                        LEFT OUTER JOIN CLIENTAPIREQUEST CR ON CR.CLIENTID = CP.CLIENTID AND CP.CLIENTID = @User AND CR.URL ='/api/sms/send' AND CR.DTREQUEST LIKE '%' + @full + '%'
+                        GROUP BY CP.SMSCREDITS,MONTH(CR.DTREQUEST),YEAR(CR.DTREQUEST)
+                    )
+                    ");
+                    //Excutando a função que foi criada
+                    $sqlCreateFunctionSms->execute();
+                    //Fazendo a consulta no banco
+                    $sqlTableInfomationSms =$conectClientPlan->query("SELECT * FROM GetDasboardTableInformationSms ('$restYear','$restMonth',$user,'$date')");
+                    $result = $sqlTableInfomationSms->fetchAll()[0];
+                    return $result;
+                }
+                          
             }catch (Exception $e) {
                 //qual é a mensagem de erro
                 $message = "\nErro: " . $e->getMessage();
@@ -99,18 +120,36 @@
                 $restYear = substr($datecall, 0,4);
                 $restMonth = substr($datecall, 5,2);
                 $conectClientPlan = Connect::getConnection();
-
-                $sqlTableInfomationCall =$conectClientPlan->query("SELECT $restMonth AS MONTH,$restYear AS YEAR,ISNULL(COUNT(CR.CLIENTID),0) AS USED,
-                IIF(COUNT(CR.CLIENTID)=0,'0',P.NAME) AS NAME,IIF(COUNT(CR.CLIENTID)=0,0,P.PRICE) AS PRICE,
-                IIF(COUNT(CR.CLIENTID)=0,0,P.REQUESTSQUANTITY) AS REQUESTSQUANTITY,(P.REQUESTSQUANTITY - IIF(COUNT(CR.CLIENTID)=0,P.REQUESTSQUANTITY,COUNT(CR.CLIENTID))) AS AVAILABLE,
-                IIF(COUNT(CR.CLIENTID)=0,0,CONVERT(DECIMAL(10,2),(P.PRICE /P.REQUESTSQUANTITY))) AS VALUECALL
-                FROM CLIENTPLAN CP
-                LEFT OUTER JOIN [PLAN] P ON P.ID = CP.PLANID
-                LEFT OUTER JOIN CLIENTAPIREQUEST CR ON CR.CLIENTID = CP.CLIENTID AND CP.CLIENTID = $user AND CR.URL <> '/api/sms/send' AND CR.DTREQUEST LIKE '%$datecall%'
-                GROUP BY P.NAME,P.PRICE,P.REQUESTSQUANTITY,MONTH(CR.DTREQUEST),YEAR(CR.DTREQUEST);");
-
-                $clientPlan = $sqlTableInfomationCall->fetchAll()[0];
-                return $clientPlan;
+                try{
+                    //Fazendo a consulta no banco
+                    $sqlTableInfomationCall =$conectClientPlan->query("SELECT * FROM GetDasboardTableInformationCall ('$restYear','$restMonth',$user,'$datecall')");
+                    $clientPlan = $sqlTableInfomationCall->fetchAll()[0];
+                    return $clientPlan;
+                }catch(Exception $e){
+                    //caso de erro criar a função no banco de dados
+                    $sqlCreateFunctionSms = $conectClientPlan->prepare("CREATE FUNCTION GetDasboardTableInformationCall(@Year nvarchar(4),@Month nvarchar(2),@User int,@full nvarchar(7))
+                    RETURNS TABLE 
+                    AS
+                    RETURN 
+                    (
+                        SELECT @Month AS MONTH,@Year AS YEAR,ISNULL(COUNT(CR.CLIENTID),0) AS USED,
+                        IIF(COUNT(CR.CLIENTID)=0,'0',P.NAME) AS NAME,IIF(COUNT(CR.CLIENTID)=0,0,P.PRICE) AS PRICE,
+                        IIF(COUNT(CR.CLIENTID)=0,0,P.REQUESTSQUANTITY) AS REQUESTSQUANTITY,(P.REQUESTSQUANTITY - IIF(COUNT(CR.CLIENTID)=0,P.REQUESTSQUANTITY,COUNT(CR.CLIENTID))) AS AVAILABLE,
+                        IIF(COUNT(CR.CLIENTID)=0,0,CONVERT(DECIMAL(10,2),(P.PRICE /P.REQUESTSQUANTITY))) AS VALUECALL
+                        FROM CLIENTPLAN CP
+                        LEFT OUTER JOIN [PLAN] P ON P.ID = CP.PLANID
+                        LEFT OUTER JOIN CLIENTAPIREQUEST CR ON CR.CLIENTID = CP.CLIENTID AND CP.CLIENTID = @User AND CR.URL <> '/api/sms/send' AND CR.DTREQUEST LIKE '%' + @full + '%'
+                        GROUP BY P.NAME,P.PRICE,P.REQUESTSQUANTITY,MONTH(CR.DTREQUEST),YEAR(CR.DTREQUEST)
+                    )
+                    ");
+                    //Excutando a função que foi criada
+                    $sqlCreateFunctionSms->execute();
+                    //Fazendo a consulta no banco
+                    $sqlTableInfomationCall =$conectClientPlan->query("SELECT * FROM GetDasboardTableInformationCall ('$restYear','$restMonth',$user,'$datecall')");
+                    $clientPlan = $sqlTableInfomationCall->fetchAll()[0];
+                    return $clientPlan;
+                }
+                
             }catch (Exception $e) {
                 //qual é a mensagem de erro
                 $message = "\nErro: " . $e->getMessage();
