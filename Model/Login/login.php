@@ -17,10 +17,9 @@
 
         while($clientPlanLine = $statment->fetch(PDO::FETCH_ASSOC)) {
             $_SESSION['clientid'] = $clientPlanLine['ID'];//salva na sesão o id do usuário logado
-            echo $clientPlanLine['PASSWORD'];
         }
         if($statment->rowCount()==1){//se for igual a 1 manda para home
-            header("location:../../View/Home/home.php");
+            //header("location:../../View/Home/home.php");
         }else{
             //se for diferente verifica a senha sem ser MD5
             $statmentMD5 = $connection ->prepare("SELECT * FROM CLIENT WHERE EMAIL = '$email' AND PASSWORD = '$password';");
