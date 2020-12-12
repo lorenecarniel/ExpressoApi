@@ -1,38 +1,23 @@
 <?php
+    
     require_once "../../Database/conection.php";
-
+    require_once "../../Model/Settings/settingsAction.php";
     $pdo = Connect::getConnection();
-
+    $clientid = $_SESSION['clientid'];
+    //verifica se o botão Adicionar foi clicado
     if (isset($_POST['insert'])) {
-        $usuarioCadastrado = $_POST['username'];
-
-        $res = $pdo->query("SELECT COUNT(*) FROM CLIENTAPI WHERE USERNAME = '$usuarioCadastrado'");
-        $count = $res->fetchColumn();
-
-        if ($count > 0) {
-            echo "Há ".$count." usuarios já cadastrados";
-        }else{
-            
-                $username = $_POST['username'];
-                $password = $_POST['password'];
-                $provedor = $_POST['provedores'];
-                
-                try {
-                    $inserir = $pdo->query("INSERT INTO CLIENTAPI(USERNAME, PASSWORD, CLIENTID) VALUES ('$username','$password','$provedor')");
-                } catch (PDOException $e) {
-                    echo "Erro ao iserir: ".$e->getMessage();
-                }
-            
-        }
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $api = $_POST['provedores'];
+        //chama a classe e função referente ao adicionar
+        Settings::addProviderClient($username,$password,$api,$clientid);
     }
 
-    if (isset($_GET['acao'])&&$_GET['acao']=='del') {
-        $ApiId = $_GET['Id'];
-        try {
-            $stmt = $pdo->query("DELETE FROM CLIENTAPI WHERE APIID = '$ApiId'");
-        } catch (PDOException $e) {
-            echo "Erro: ".$e->getMessage();
-        }
+    //verifica se o botão Deletar foi clicado
+    if(isset($_POST['delete'])){
+        //chama a classe e função referente ao deletar
+        $ApiId = $_POST['id'];
+        Settings::delProviderClient($ApiId,$clientid);
     }
 ?>
 
@@ -60,7 +45,7 @@
             
             <h1>Configurações</h1>
             
-            <a class="exit" href="../index.html">
+            <a class="exit" href="../../Model/exit.php">
                 <img src="../../assets/icons/log-out.svg" alt="Sair">
                 <span class="ml-3 config-span">Sair</span>
             </a>
@@ -81,8 +66,8 @@
                             try {
                                 $sql = $pdo->query("SELECT * FROM API");
                                 if ($sql->execute()) {
-                                    while ($res = $sql->fetch(PDO::FETCH_OBJ)) {
-                                        echo "<option value='$res->NAME'>".$res->NAME."</option>";
+                                    while ($result = $sql->fetch(PDO::FETCH_OBJ)) {
+                                        echo "<option value='$result->ID'>".$result->NAME."</option>";
                                     }
                                 }else{
                                     echo "Erro: não foi possivel listar os registros";
@@ -102,7 +87,7 @@
                             <input type="password" name="password" class="form-control" placeholder="Senha" required>
                         </div>
                         <div class="card-y2 col-md-6">
-                            <button type="submit" name="insert" class="btn btn-primary">Adicionar</button>
+                            <button type="submit" name="insert" value="1" class="btn btn-primary">Adicionar</button>
                         </div>
                     </div>
                 </form>
@@ -127,15 +112,21 @@
             <tbody>
                 <?php
                     try {
-                        $sql = "select * from CLIENTAPI";
+                        $sql = "SELECT C.CLIENTID,C.APIID,C.USERNAME,C.PASSWORD,A.NAME
+                        FROM CLIENTAPI C,API A
+                        WHERE A.ID = C.APIID;";
                         $stmt = $pdo->query($sql);
                         if ($stmt->execute()) {
                             while ($res = $stmt->fetch(PDO::FETCH_OBJ)) {
                                 echo "<tr>";
-                                echo "<td>".$res->CLIENTID."</td>";
+                                echo "<td>".$res->NAME."</td>";
                                 echo "<td>".$res->USERNAME."</td>";
                                 echo "<td>".$res->PASSWORD."</td>";
-                                echo "<td><a href=\"home.php?Id=".$res->APIID."&acao=del\"><img src='../../assets/icons/delete.svg'></a></td>";
+                                echo "<td><form method='POST' action=''>
+                                <input type='hidden' name='id' value='".$res->APIID."'/>
+                                <button type='submit' name='delete' id='buttonDelete'><img src='../../assets/icons/delete.svg'></button>
+                            </form></td>";
+                                //echo "<td><a href=\"home.php?Id=".$res->APIID."&acao=del\"><img src='../../assets/icons/delete.svg'></a></td>";
                                 echo "</tr>";
                             }
                         }else{
