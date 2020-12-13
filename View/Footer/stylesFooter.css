@@ -5,7 +5,7 @@
   padding: 25px 0;
   align-items: center;
   justify-content: center;
-  background-color: #cccccc;
+  background-color: var(--color-light-gray);
 }
 
 #linha-vertical {

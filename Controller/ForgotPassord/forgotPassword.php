@@ -6,7 +6,7 @@ if(isset($_POST['enviar'])){
 
     if(empty($_POST["email"])){
         echo "<script type='text/javascript'>
-        window.location.href = '../../View/ForgotPassword.forgotPassword.html';
+        window.location.href = '../../View/ForgotPassword/forgotPassword.html';
         alert('Preencha o E-mail corretamente.');
         </script>";
           }
@@ -34,7 +34,7 @@ if(isset($_POST['enviar'])){
                                 }   
                                 else{//se o email não existir
                                 echo "<script type='text/javascript'>
-                                window.location.href = '../../View/ForgotPassword.forgotPassword.html';
+                                window.location.href = '../../View/ForgotPassword/forgotPassword.html';
                                 alert('E-mail não encontrado.');
                                 </script>";
                                 }
@@ -47,4 +47,3 @@ if(isset($_POST['enviar'])){
 
                 }
         }
-?>

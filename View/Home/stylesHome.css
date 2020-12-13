@@ -1,5 +1,4 @@
 /* Menu e sidebar*/
-
 #page-menu {
   display: flex;
 }
@@ -150,6 +149,6 @@ a.exit img {
 }
 
 a.exit {
-  color: black;
+  color: var(--color-black);
   text-decoration: none;
 }

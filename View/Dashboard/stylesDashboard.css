@@ -1,17 +1,16 @@
 /* Dashboard */
 
 /* Cards */
-
 .card {
   margin-top: 20px;
   border-radius: 0.25rem;
   background-clip: border-box;
+  background-color: var(--color-white);
   border: 1px solid rgba(0, 0, 0, 0.125);
   box-shadow: 0 0.46875rem 2.1875rem rgba(4, 9, 20, 0.03),
     0 0.9375rem 1.40625rem rgba(4, 9, 20, 0.03),
     0 0.25rem 0.53125rem rgba(4, 9, 20, 0.05),
     0 0.125rem 0.1875rem rgba(4, 9, 20, 0.03);
-  background-color: var(--color-background-graphic);
 }
 
 .doughnut-card {
@@ -21,9 +20,9 @@
 .card-header {
   padding: 0.7rem;
   font-size: 16px;
-  color: #083171;
   font-weight: 600;
   align-items: center;
+  color: var(--color-primary);
   justify-content: space-between;
   background-color: var(--color-input-title);
 }
@@ -55,7 +54,6 @@ h5 {
 }
 
 /* Mais informações modal */
-
 .more_informations {
   float: right;
   font-weight: 400;
@@ -93,7 +91,6 @@ h5 {
 }
 
 /* Grid */
-
 .item {
   width: auto;
   text-align: center;
@@ -236,11 +233,11 @@ table {
   margin-bottom: 32px;
   border-radius: 0.25rem;
   border-collapse: collapse;
+  background-color: var(--color-white);
   box-shadow: 0 0.46875rem 2.1875rem rgba(4, 9, 20, 0.03),
     0 0.9375rem 1.40625rem rgba(4, 9, 20, 0.03),
     0 0.25rem 0.53125rem rgba(4, 9, 20, 0.05),
     0 0.125rem 0.1875rem rgba(4, 9, 20, 0.03);
-  background-color: var(--color-background-graphic);
 }
 
 th {
@@ -267,7 +264,6 @@ td {
   font-size: 14px;
   text-align: center;
   color: var(--color-primary);
-  background-color: var(--color-background-cards);
 }
 
 .table th {
@@ -297,23 +293,6 @@ td {
   background-color: var(--color-background-cards);
 }
 
-/* Modal - confirmação de e-mail */
-.modal-body {
-  padding: 24px;
-}
-
-#padding-modalCorfirm {
-  padding: 12px;
-}
-
-#modalCorfirm-header {
-  padding: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column-reverse;
-}
-
-.modal-content {
-  background-color: var(--color-background);
+table.table.table-striped {
+  margin-bottom: 10px;
 }
