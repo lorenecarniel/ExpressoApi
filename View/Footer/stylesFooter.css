@@ -3,6 +3,7 @@
 #contact {
   display: flex;
   flex-wrap: wrap;
+  margin-top: 3.8rem;
   padding: 25px 0;
   align-items: center;
   justify-content: center;

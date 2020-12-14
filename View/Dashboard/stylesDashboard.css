@@ -308,11 +308,13 @@ table.table.table-striped {
 
 .box-cookies {
   bottom: 0;
+  width: 82%;
   z-index: 998;
   display: flex;
   position: fixed;
   align-items: center;
   border-radius: 8px 8px 0 0;
+  justify-content: space-between;
   background: rgba(0, 0, 0, 0.9);
 }
 
@@ -321,7 +323,7 @@ table.table.table-striped {
   margin: 0;
   padding: 25px;
   color: #fff;
-  font-size: 18px;
+  font-size: 14px;
   text-align: center;
 }
 

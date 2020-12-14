@@ -420,13 +420,13 @@
 
     <script>
       (() => {
-        if (!localStorage.pureJavaScriptCookies) {
+        if (!localStorage.permissionCookies) {
           document.querySelector(".box-cookies").classList.remove('hide');
         }
   
         const acceptCookies = () => {
           document.querySelector(".box-cookies").classList.add('hide');
-          localStorage.setItem("pureJavaScriptCookies", "accept");
+          localStorage.setItem("permissionCookies", "accept");
           location.reload();
         };
         

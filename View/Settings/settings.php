@@ -143,6 +143,9 @@
                 </table>
             </div>
         </main>
+        
+        
+        <footer><?php require "../Footer/footer.html" ?></footer>
     </div>
     
     <!--Scripts-->

@@ -98,7 +98,7 @@
       const input = document.querySelector(".toggle-theme");
       const allPage = document.querySelector("#page-menu");
 
-      if(localStorage.pureJavaScriptCookies){
+      if(localStorage.permissionCookies){
         input.onchange = toggleDarkMode;
 
         let theme;
