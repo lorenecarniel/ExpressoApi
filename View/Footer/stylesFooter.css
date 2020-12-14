@@ -2,6 +2,7 @@
 
 #contact {
   display: flex;
+  flex-wrap: wrap;
   padding: 25px 0;
   align-items: center;
   justify-content: center;

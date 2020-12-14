@@ -130,9 +130,9 @@ div#navbarNavDropdown {
 #about {
   height: 600px;
   display: flex;
-  flex-direction: column;
   padding-top: 50px;
   align-items: center;
+  flex-direction: column;
   justify-content: center;
   color: var(--color-white);
   background-color: var(--color-primary);
@@ -140,6 +140,7 @@ div#navbarNavDropdown {
 .responsive {
   width: 60%;
   display: flex;
+  margin-bottom: auto;
   align-items: center;
   justify-content: center;
 }
@@ -181,7 +182,7 @@ div#navbarNavDropdown {
 /* Como funciona */
 #howitworks {
   display: grid;
-  padding: 60px 0;
+  padding: 95px 0;
   align-items: center;
   justify-content: center;
   color: var(--color-primary);
@@ -225,8 +226,8 @@ div#navbarNavDropdown {
 
 .title h1 {
   font-size: 23px;
-  font-weight: 700;
-  margin-bottom: 38px;
+  font-weight: 600;
+  margin-bottom: 50px;
   font-family: "Poppins";
 }
 

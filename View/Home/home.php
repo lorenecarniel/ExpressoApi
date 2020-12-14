@@ -98,35 +98,37 @@
       const input = document.querySelector(".toggle-theme");
       const allPage = document.querySelector("#page-menu");
 
-      input.onchange = toggleDarkMode;
+      if(localStorage.pureJavaScriptCookies){
+        input.onchange = toggleDarkMode;
 
-      let theme;
-      const hasTheme = document.cookie
-        .split(";")
-        .map((c) => c.trim())
-        .filter((c) => c.startsWith("theme"))[0];
+        let theme;
+        const hasTheme = document.cookie
+          .split(";")
+          .map((c) => c.trim())
+          .filter((c) => c.startsWith("theme"))[0];
 
-      if (hasTheme) {
-        theme = hasTheme.split("=")[1];
-      }
-
-      if (theme) {
-        input.setAttribute("checked", "true");
-        allPage.classList.add(theme);
-      }
-
-      function toggleDarkMode() {
-        input.toggleAttribute("checked");
-        allPage.classList.toggle("dark");
-
-        if (theme) {
-          theme = undefined;
-          document.cookie = `theme=''; max-age=-1`;
-          return;
+        if (hasTheme) {
+          theme = hasTheme.split("=")[1];
         }
 
-        theme = "dark";
-        document.cookie = `theme=${theme}`;
+        if (theme) {
+          input.setAttribute("checked", "true");
+          allPage.classList.add(theme);
+        }
+
+        function toggleDarkMode() {
+          input.toggleAttribute("checked");
+          allPage.classList.toggle("dark");
+
+          if (theme) {
+            theme = undefined;
+            document.cookie = `theme=''; max-age=-1`;
+            return;
+          }
+
+          theme = "dark";
+          document.cookie = `theme=${theme}`;
+        }
       }
     </script>
   </body>
