@@ -60,7 +60,7 @@
                         ISNULL(COUNT(CR.CLIENTID),0) AS USED,(CP.SMSCREDITS - IIF(COUNT(CR.CLIENTID)=0,CP.SMSCREDITS,COUNT(CR.CLIENTID))) AS AVAILABLE
                         FROM CLIENTPLAN CP 
                         LEFT OUTER JOIN CLIENTAPIREQUEST CR ON CR.CLIENTID = CP.CLIENTID AND CP.CLIENTID = @User AND CR.URL ='/api/sms/send' AND CR.DTREQUEST LIKE '%' + @full + '%'
-                        GROUP BY CP.SMSCREDITS,MONTH(CR.DTREQUEST),YEAR(CR.DTREQUEST)
+                        GROUP BY CP.SMSCREDITS
                     )
                     ");
                     //Excutando a função que foi criada
@@ -139,7 +139,7 @@
                         FROM CLIENTPLAN CP
                         LEFT OUTER JOIN [PLAN] P ON P.ID = CP.PLANID
                         LEFT OUTER JOIN CLIENTAPIREQUEST CR ON CR.CLIENTID = CP.CLIENTID AND CP.CLIENTID = @User AND CR.URL <> '/api/sms/send' AND CR.DTREQUEST LIKE '%' + @full + '%'
-                        GROUP BY P.NAME,P.PRICE,P.REQUESTSQUANTITY,MONTH(CR.DTREQUEST),YEAR(CR.DTREQUEST)
+                        GROUP BY P.NAME,P.PRICE,P.REQUESTSQUANTITY
                     )
                     ");
                     //Excutando a função que foi criada
